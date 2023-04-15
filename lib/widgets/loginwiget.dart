@@ -2,15 +2,19 @@ import 'dart:ffi';
 
 import 'package:fl_country_code_picker/fl_country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/utils/app_constants.dart';
 import 'package:taxiapp/widgets/text_wiget.dart';
 
+import '../views/otp_verification.dart';
+
 Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged) {
   return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Expanded(
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -67,6 +71,9 @@ Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged) {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: TextField(
+                        onTap: (){
+                          Get.to(()=>OtpVerificationScreen());
+                        },
                         decoration: InputDecoration(
                             hintStyle: GoogleFonts.poppins(
                                 fontSize: 13, fontWeight: FontWeight.normal),
@@ -89,7 +96,7 @@ Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged) {
                       style: TextStyle(color: Colors.black, fontSize: 12),
                       children: [
                         TextSpan(
-                          text: AppConstants.byCreating + " ",
+                          text: "${AppConstants.byCreating} ",
                         ),
                         TextSpan(
                             text: AppConstants.termsOfService,
@@ -103,5 +110,5 @@ Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged) {
             )
           ],
         ),
-      ));
+      );
 }
