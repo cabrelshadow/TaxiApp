@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:pinput/pinput.dart';
+import 'package:taxiapp/controller/auth_controller.dart';
 
 
 class RoundedWithShadow extends StatefulWidget {
@@ -15,7 +16,7 @@ class _RoundedWithShadowState extends State<RoundedWithShadow> {
   final controller = TextEditingController();
   final focusNode = FocusNode();
 
-
+AuthController authController= Get.find<AuthController>();
 
 
   @override
@@ -56,7 +57,7 @@ class _RoundedWithShadowState extends State<RoundedWithShadow> {
       controller: controller,
       focusNode: focusNode,
       onCompleted: (String input){
-
+         authController.verifyOtp(input);
       },
       defaultPinTheme: defaultPinTheme.copyWith(
         decoration: BoxDecoration(

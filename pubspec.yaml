@@ -40,6 +40,8 @@ dependencies:
   google_fonts: ^3.0.1
   fl_country_code_picker: ^0.0.2+1
   pinput: ^2.2.12
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.4.1
 
 dev_dependencies:
   flutter_test:

@@ -11,7 +11,7 @@ import 'package:taxiapp/widgets/text_wiget.dart';
 
 import '../views/otp_verification.dart';
 
-Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged) {
+Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged,Function onSubmit) {
   return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
 
@@ -71,9 +71,9 @@ Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged) {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: TextField(
-                        onTap: (){
-                          Get.to(()=>OtpVerificationScreen());
-                        },
+                         onSubmitted:(String? input)=>onSubmit(input) ,
+
+
                         decoration: InputDecoration(
                             hintStyle: GoogleFonts.poppins(
                                 fontSize: 13, fontWeight: FontWeight.normal),
