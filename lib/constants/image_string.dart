@@ -1,0 +1,14 @@
+const String tSplashTopIcon="assets/images/gd.png";
+const String tSplashImage="assets/images/travel.png";
+//onboarding image strings
+const String tOnboardingImagePage1="assets/imagse/on1.png";
+const String tOnboardingImagePage2="assets/images/on2.png";
+const String tOnboardingImagePage3="assets/images/on3.png";
+//welcome image string
+const String welcomeImage="assets/images/wel.png";
+const String forgetpassword="assets/images/password.png";
+//login image string
+const String loginimage="assets/images/log.png";
+const String  iconLogin="assets/images/google.png";
+const String  userIcon="assets/images/peson.png";
+const String  bookmark="assets/images/bookm.png";

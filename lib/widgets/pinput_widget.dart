@@ -53,6 +53,7 @@ AuthController authController= Get.find<AuthController>();
     );
 
     return Pinput(
+      keyboardType: TextInputType.phone,
       length: 6,
       controller: controller,
       focusNode: focusNode,
@@ -63,7 +64,7 @@ AuthController authController= Get.find<AuthController>();
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.05999999865889549),
               offset: Offset(0, 3),
@@ -77,7 +78,7 @@ AuthController authController= Get.find<AuthController>();
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.05999999865889549),
               offset: Offset(0, 3),

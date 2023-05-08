@@ -1,16 +1,16 @@
 class AppConstants{
  static const kGoogleApiKey = "YOUR-Map-KEy";
 
-  static const String helloNiceToMeetYou = 'Hello, nice to meet you!';
-  static const String getMovingWithGreenTaxi = 'Get moving with Green Taxi';
-  static const String enterMobileNumber = 'Enter your mobile number';
-  static const String byCreating = 'By creating an account, you agree to our';
-  static const String termsOfService = 'Terms of Service';
-  static const String of = 'of';
-  static const String privacyPolicy = 'Privacy Policy';
-  static const String phoneVerification = 'Phone Verification';
-  static const String enterOtp = 'Enter your OTP code below';
-  static const String resendCode = 'Resend code in';
-  static const String seconds = 'seconds';
+ static const String helloNiceToMeetYou = 'Hey,heureux de vous revoir';
+ static const String getMovingWithGreenTaxi = 'Entrer votre numero de telephone';
+ static const String enterMobileNumber = 'Entrer votre numero';
+ static const String byCreating = 'En creant votre compte vous accepter les ';
+ static const String termsOfService = 'terms';
+ static const String of = 'et';
+ static const String privacyPolicy = 'conditon';
+ static const String phoneVerification = 'Verification du numero de telephone';
+ static const String enterOtp = 'Entre vote code OPT';
+ static const String resendCode = 'Renvoyer le code';
+ static const String seconds = 'seconds';
 
 }

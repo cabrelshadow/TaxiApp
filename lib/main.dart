@@ -2,7 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taxiapp/controller/auth_controller.dart';
 import 'package:taxiapp/views/login_screen.dart';
+import 'package:taxiapp/views/profile_settings.dart';
+import 'package:taxiapp/views/splash_screen.dart';
 
 import 'firebase_options.dart';
 
@@ -18,6 +21,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController =Get.put(AuthController());
+    authController.decideRoute();
     final textTheme = Theme.of(context).textTheme;
     return  GetMaterialApp(
 
@@ -25,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
-      home:  LoginScreen(),
+      home: Splashscreen(),
     );
   }
 }
