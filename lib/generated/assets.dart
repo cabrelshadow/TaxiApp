@@ -9,10 +9,10 @@ class Assets {
   static const String assetsDriver = 'assets/driver.png';
   static const String assetsGreenTaxi = 'assets/greenTaxi.svg';
   static const String assetsLeaf = 'assets/leaf.svg';
-  static const String assetsLeaficon = 'assets/leaf icon.svg';
+
   static const String assetsMapStyle = 'assets/map_style.txt';
   static const String assetsMask = 'assets/mask.png';
-  static const String assetsMaskGroup2 = 'assets/Mask Group 2.png';
+
   static const String assetsPerson = 'assets/person.png';
   static const String assetsR = 'assets/r.png';
   static const String assetsSource = 'assets/source.gif';
@@ -22,13 +22,15 @@ class Assets {
   static const String imagesGoogle = 'assets/images/google.png';
   static const String imagesGreenTaxi = 'assets/images/greenTaxi.svg';
   static const String imagesLeaf = 'assets/images/leaf.svg';
-  static const String imagesLeaficon = 'assets/images/leaf icon.svg';
+
   static const String imagesLog = 'assets/images/log.png';
+  static const String imagesMenu = 'assets/images/menu.png';
   static const String imagesOn1 = 'assets/images/on1.png';
   static const String imagesOn2 = 'assets/images/on2.png';
   static const String imagesOn3 = 'assets/images/on3.png';
   static const String imagesPassword = 'assets/images/password.png';
   static const String imagesPeson = 'assets/images/peson.png';
+  static const String imagesPro = 'assets/images/pro.jpg';
   static const String imagesR = 'assets/images/r.png';
   static const String imagesSplash = 'assets/images/splash.png';
   static const String imagesTravel = 'assets/images/travel.png';

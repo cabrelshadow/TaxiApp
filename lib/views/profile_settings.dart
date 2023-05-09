@@ -23,6 +23,8 @@ class ProfileSettingScreen extends StatefulWidget {
 }
 
 class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
+  //verifiacation du formulaire
+  final _formfield=GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController homeController = TextEditingController();
@@ -97,28 +99,36 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 23),
-              child: Column(
-                children: [
-                   TextFieldWidget('nom',  Icons.person_outlined, nameController),
-                  SizedBox( height: 10),
+              child:Form(
+                key: _formfield,
+                child: Column(
+                  children: [
+                     TextFieldWidget('nom',  Icons.person_outlined, nameController),
+                    SizedBox( height: 10),
 
-                  TextFieldWidget('prenom',  Icons.person_outlined, homeController),
-                  SizedBox( height: 10),
+                    TextFieldWidget('prenom',  Icons.person_outlined, homeController,
 
-                  TextFieldWidget('ville de redisence',  Icons.home_outlined, businessController),
-                  SizedBox( height: 10),
+                    ),
+                    SizedBox( height: 10),
+
+                    TextFieldWidget('ville de redisence',  Icons.home_outlined, businessController),
+                    SizedBox( height: 10),
 
 
-                  SizedBox( height: 30),
-                isLoading?Center(
-                  child: LinearProgressIndicator(),
-                ) : greenButton('Register',(){
-                    setState(() {
-                      isLoading=true;
-                    });
-                    storeUserInfo();
-                  }),
-                ],
+                    SizedBox( height: 30),
+                  isLoading?Center(
+                    child: LinearProgressIndicator(),
+                  ) : greenButton('Register',(){
+                      setState(() {
+                         if(_formfield.currentState!.validate()){
+
+                         }
+                        isLoading=true;
+                      });
+                      storeUserInfo();
+                    }),
+                  ],
+                ),
               ),
             ),
           ],
@@ -156,9 +166,12 @@ storeUserInfo()async{
 
 
     }).then((value){
-      nameController.clear();
-      homeController.clear();
-      businessController.clear();
+      if(_formfield.currentState!.validate()){
+        nameController.clear();
+        homeController.clear();
+        businessController.clear();
+      }
+
 
       setState(() {
         isLoading=false;
@@ -200,7 +213,7 @@ bool isLoading=false;
           child: TextFormField(
             //readOnly: readOnly,
            // onTap: ()=> onTap!(),
-           // validator: (input)=> validator(input),
+         //  validator: (input)=> validator(input),
             controller: controller,
             style: GoogleFonts.poppins(
                 fontSize: 14,

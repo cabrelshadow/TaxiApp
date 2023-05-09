@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../constants/text_strings.dart';
+
 Widget  greenIntrWigget(){
   return Container(
     width: Get.width,
@@ -23,7 +25,7 @@ Widget  greenIntrWigget(){
          height: 20,
 
         ),
-        SvgPicture.asset('assets/greenTaxi.svg')
+     Text(tAppName,style: GoogleFonts.poppins(fontSize: 30,fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.center,)
       ],
     ),
   );

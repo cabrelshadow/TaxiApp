@@ -12,3 +12,5 @@ const String loginimage="assets/images/log.png";
 const String  iconLogin="assets/images/google.png";
 const String  userIcon="assets/images/peson.png";
 const String  bookmark="assets/images/bookm.png";
+const String  menu="assets/images/menu.png";
+const String  profile="assets/images/pro.jpg";

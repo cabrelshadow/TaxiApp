@@ -1,75 +1,6 @@
-import'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:taxiapp/constants/image_string.dart';
-import 'package:taxiapp/constants/text_strings.dart';
+import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
-import '../widgets/my_drawer_header.dart';
-
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar:AppBar(
-          title: Text(tAppName ,style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 15,color:appcolor),),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          actions: [
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(10),color:Colors.white70,
-              ),
-              child: IconButton(
-
-                onPressed: (){},icon: Image(image: AssetImage(userIcon),),
-              ),
-            )
-          ],
-          leading: IconButton(
-            icon: Icon(Icons.menu,size: 30,),color: Colors.black,
-            onPressed: (){
-
-            },
-          ),
-        ) ,
-        drawer: Drawer(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
-          ),
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                  children: [
-                    MyHeaderDrawer(),
-                    MyDrawerList1(),
-                  ],
-              ),
-            ),
-          ),
-        ),
-        body: Container(
-             child: Center(
-               child: Text("home page"),
-
-             ),
-        ),
-        
-        bottomNavigationBar: NavigationBar(),
-      ),
-    );
-  }
-  Widget MyDrawerList1(){
-    return Container();
-  }
-}
 
 Widget NavigationBar() {
   return Container(
@@ -156,4 +87,3 @@ Widget NavigationBar() {
     ),
   );
 }
-

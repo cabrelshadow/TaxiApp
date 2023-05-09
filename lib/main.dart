@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/controller/auth_controller.dart';
+import 'package:taxiapp/views/homeScreen.dart';
 import 'package:taxiapp/views/login_screen.dart';
 import 'package:taxiapp/views/profile_settings.dart';
 import 'package:taxiapp/views/splash_screen.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
-      home: Splashscreen(),
+      home: HomeScreen(),
     );
   }
 }
