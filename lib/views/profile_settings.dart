@@ -24,7 +24,7 @@ class ProfileSettingScreen extends StatefulWidget {
 
 class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
   //verifiacation du formulaire
-  final _formfield=GlobalKey<FormState>();
+GlobalKey<FormState> formKey =GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController homeController = TextEditingController();
@@ -100,34 +100,54 @@ class _ProfileSettingScreenState extends State<ProfileSettingScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 23),
               child:Form(
-                key: _formfield,
-                child: Column(
-                  children: [
-                     TextFieldWidget('nom',  Icons.person_outlined, nameController),
-                    SizedBox( height: 10),
 
-                    TextFieldWidget('prenom',  Icons.person_outlined, homeController,
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    children: [
+                       TextFieldWidget('nom',  Icons.person_outlined, nameController,(String? input){
+                          if(input!.isEmpty){
+                            return "le champs nom est obligatoir";
+                          }
+                          if(input.length<3){
+                            return"le nom ne peut pas etre 2 caractaire minimum 3";
+                          }
+                          return null;
+                       }),
+                      SizedBox( height: 10),
 
-                    ),
-                    SizedBox( height: 10),
+                      TextFieldWidget('prenom',  Icons.person_outlined, homeController,(String? input){
+                        if(input!.isEmpty){
+                          return "le champs prenom est obligatoir";
+                        }
+                    return null;
+                      }),
+                      SizedBox( height: 10),
 
-                    TextFieldWidget('ville de redisence',  Icons.home_outlined, businessController),
-                    SizedBox( height: 10),
+                      TextFieldWidget('ville de redisence',  Icons.home_outlined, businessController,(String,input){
+                        if(input!.isEmpty){
+                          return "le champs ville de residance  est obligatoir";
+                        }
+                        return null;
+                      }),
+                      SizedBox( height: 10),
 
 
-                    SizedBox( height: 30),
-                  isLoading?Center(
-                    child: LinearProgressIndicator(),
-                  ) : greenButton('Register',(){
-                      setState(() {
-                         if(_formfield.currentState!.validate()){
+                      SizedBox( height: 30),
+                    isLoading?Center(
+                      child: LinearProgressIndicator(),
+                    ) : greenButton('Register',(){
+                      if(!formKey.currentState!.validate()){
+                        return;
+                      }
+                        setState(() {
 
-                         }
-                        isLoading=true;
-                      });
-                      storeUserInfo();
-                    }),
-                  ],
+                          isLoading=true;
+                        });
+                        storeUserInfo();
+                      }),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -166,11 +186,10 @@ storeUserInfo()async{
 
 
     }).then((value){
-      if(_formfield.currentState!.validate()){
         nameController.clear();
         homeController.clear();
         businessController.clear();
-      }
+
 
 
       setState(() {
@@ -183,7 +202,7 @@ storeUserInfo()async{
 bool isLoading=false;
 @override
   TextFieldWidget(
-      String title, IconData iconData, TextEditingController controller,) {
+      String title, IconData iconData, TextEditingController controller,Function validator) {
     //Function validator,{Function? onTap,bool readOnly = false}
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,9 +230,9 @@ bool isLoading=false;
               ],
               borderRadius: BorderRadius.circular(8)),
           child: TextFormField(
-            //readOnly: readOnly,
-           // onTap: ()=> onTap!(),
-         //  validator: (input)=> validator(input),
+            //vallidate imput
+            //appel de la function validator passer en parametre
+            validator:(input)=>validator(input),
             controller: controller,
             style: GoogleFonts.poppins(
                 fontSize: 14,

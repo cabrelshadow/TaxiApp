@@ -1,16 +1,38 @@
 import'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:taxiapp/constants/image_string.dart';
 import 'package:taxiapp/constants/text_strings.dart';
-
+import 'package:flutter/services.dart' show rootBundle;
 import '../constants/colors.dart';
 import '../constants/sizes.dart';
 import '../widgets/my_drawer_header.dart';
 
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String? _mapStyle;
+
+  @override
+  void initState(){
+    super.initState();
+    rootBundle.loadString('assets/map_style.text').then((String){
+      _mapStyle=String;
+
+    });
+  }
+
+final CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
+GoogleMapController? myMapController;
   @override
   Widget build(BuildContext context) {
     return
@@ -51,194 +73,22 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-         body: SingleChildScrollView(
-           padding: EdgeInsets.all(10),
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Hello",style: GoogleFonts.montserrat( fontSize: 16),),
-                  Text(tDashoardHeading,style: GoogleFonts.montserrat( fontSize: 20,fontWeight: FontWeight.bold),),
-                  SizedBox(height: tDashboardPadding,),
-                  Container(
-                    height: 150,
-                    width: 410,
+         body: Scaffold(
+           body: GoogleMap(
 
-                    decoration: BoxDecoration(
-                        color:Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0,3),
-                            blurRadius: 5,
-                            color: Colors.black.withOpacity(0.5),
-                          )
-                        ]
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image(image: AssetImage(bus)),
-                        Container(
-                           padding:EdgeInsets.only(top: 20),
-                          width: 150,
-
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("reduction sur les  de 50%",style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black                    ),textAlign: TextAlign.center,),
-                               SizedBox(height: 2,),
-                            SizedBox(
-                              width: double.infinity,
-                              child: ElevatedButton(onPressed: (){
-
-                              },
-
-                                  style: ElevatedButton.styleFrom(
-                                      foregroundColor:Colors.white,
-                                     backgroundColor: appcolor
-                                  ),
-                                  child: Text(tDashboardBannerButton,style: GoogleFonts.poppins(fontSize: 15),)
-                              ),
-                            ),
-
-                          ],
-
-                          ),
-                        )
-
-                      ],
-                    ),
-
-                  ),
-                 SizedBox(height: 15,),
-                 Column(
-                   children: [
-
-                     Text("Nos services",style: GoogleFonts.poppins( fontSize: 20,),),
-                   ],
-                 ),
-               SizedBox(height: 10,),
-               SizedBox(
-                 height: 180,
-                 width:400 ,
-                 child: ListView(
-                   shrinkWrap: true,
-                   scrollDirection: Axis.horizontal,
-                   children: [
-                     Container(
-                       padding: EdgeInsets.all(10),
-                       margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                       height: 150,
-                       width: 200,
-                       decoration: BoxDecoration(
-                         image: DecorationImage(
-                             image: AssetImage(car),
-                             fit: BoxFit.cover),
-                         borderRadius: BorderRadius.circular(10),
-
-                         color: Colors.white,
-                         boxShadow: [
-                           BoxShadow(
-                             offset: Offset(0,2),
-                             blurRadius: 2,
-                             color: Colors.black.withOpacity(0.2),
-                           ),
-                         ],
-
-                       ),
-                       child: Column(
-                         children: [
-                           Column(
-                             children: [
-                               Text("fdfdfd",style: GoogleFonts.poppins(
-                                 fontSize: 12,
-                                 fontWeight: FontWeight.bold
-                               ),)
-                             ],
-                           )
-
-                         ],
-                       ),
-                     ),
-                     Container(
-                       padding: EdgeInsets.all(10),
-                       margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                       height: 150,
-                       width: 200,
-                       decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(10),
-                         color: Colors.white,
-                         boxShadow: [
-                           BoxShadow(
-                             offset: Offset(0,2),
-                             blurRadius: 2,
-                             color: Colors.black.withOpacity(0.2),
-                           ),
-                         ],
-
-                       ),
-                       child: Column(
-                         children: [
-                           Icon(Icons.bus_alert_outlined,size: 50,color: appcolor,),
-                           Text("Bus",style: GoogleFonts.poppins(
-                             fontWeight: FontWeight.bold,
-                             color: Colors.black ,
-                             fontSize:20 ,
-                           ),),
-                         ],
-                       ),
-                     ),
-                     Container(
-                       padding: EdgeInsets.all(10),
-                       margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                       height: 150,
-                       width: 210,
-                       decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(10),
-                         color: Colors.white,
-                         boxShadow: [
-                           BoxShadow(
-                             offset: Offset(0,2),
-                             blurRadius: 2,
-                             color: Colors.black.withOpacity(0.2),
-                           ),
-                         ],
-
-                       ),
-                       child: Column(
-                         children: [
-                           Icon(Icons.bus_alert_outlined,size: 50,color: appcolor,),
-                           Text("Bus",style: GoogleFonts.poppins(
-                             fontWeight: FontWeight.bold,
-                             color: Colors.black ,
-                             fontSize:20 ,
-                           ),),
-                         ],
-                       ),
-                     ),
-
-
-                   ],
-                 ),
-               ),
-
-                ],
-              ),
-
-            ),
-
-
-    ),
+             onMapCreated: (GoogleMapController controller){
+                myMapController=controller;
+                myMapController!.setMapStyle(_mapStyle);
+             },initialCameraPosition: _kGooglePlex,
+           ),
+         ),
 
 
         bottomNavigationBar: NavigationBar(),
 
     );
   }
+
   Widget MyDrawerList1(){
     return Container();
   }

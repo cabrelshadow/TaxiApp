@@ -46,7 +46,7 @@ Widget greenIntroWidgetWithoutLogos(){
       width: Get.width,
       margin: EdgeInsets.only(bottom: Get.height*0.05),
       child: Center(
-        child: Text("profile Setting",
+        child: Text("S'\enregistrer",
         style: GoogleFonts.poppins(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),
         ),
       ),
