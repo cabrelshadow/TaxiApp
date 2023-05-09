@@ -4,6 +4,7 @@ import 'package:taxiapp/constants/image_string.dart';
 import 'package:taxiapp/constants/text_strings.dart';
 
 import '../constants/colors.dart';
+import '../constants/sizes.dart';
 import '../widgets/my_drawer_header.dart';
 
 
@@ -12,31 +13,26 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return
+       Scaffold(
         appBar:AppBar(
+          iconTheme: IconThemeData(color: Colors.black),
           title: Text(tAppName ,style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 15,color:appcolor),),
           centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.transparent,
+          elevation: 2,
+          shadowColor: Colors.white,
+          backgroundColor: Colors.white,
           actions: [
             Container(
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(10),color:Colors.white70,
-              ),
+
               child: IconButton(
 
                 onPressed: (){},icon: Image(image: AssetImage(userIcon),),
               ),
             )
           ],
-          leading: IconButton(
-            icon: Icon(Icons.menu,size: 30,),color: Colors.black,
-            onPressed: (){
-          //    Scaffold.of(context).openDrawer();
-            },
-          ),
+
         ) ,
         drawer: Drawer(
           shape: const RoundedRectangleBorder(
@@ -55,15 +51,192 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: Container(
-             child: Center(
-               child: Text("home page"),
+         body: SingleChildScrollView(
+           padding: EdgeInsets.all(10),
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Hello",style: GoogleFonts.montserrat( fontSize: 16),),
+                  Text(tDashoardHeading,style: GoogleFonts.montserrat( fontSize: 20,fontWeight: FontWeight.bold),),
+                  SizedBox(height: tDashboardPadding,),
+                  Container(
+                    height: 150,
+                    width: 410,
 
-             ),
-        ),
-        
+                    decoration: BoxDecoration(
+                        color:Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0,3),
+                            blurRadius: 5,
+                            color: Colors.black.withOpacity(0.5),
+                          )
+                        ]
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image(image: AssetImage(bus)),
+                        Container(
+                           padding:EdgeInsets.only(top: 20),
+                          width: 150,
+
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("reduction sur les  de 50%",style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black                    ),textAlign: TextAlign.center,),
+                               SizedBox(height: 2,),
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(onPressed: (){
+
+                              },
+
+                                  style: ElevatedButton.styleFrom(
+                                      foregroundColor:Colors.white,
+                                     backgroundColor: appcolor
+                                  ),
+                                  child: Text(tDashboardBannerButton,style: GoogleFonts.poppins(fontSize: 15),)
+                              ),
+                            ),
+
+                          ],
+
+                          ),
+                        )
+
+                      ],
+                    ),
+
+                  ),
+                 SizedBox(height: 15,),
+                 Column(
+                   children: [
+
+                     Text("Nos services",style: GoogleFonts.poppins( fontSize: 20,),),
+                   ],
+                 ),
+               SizedBox(height: 10,),
+               SizedBox(
+                 height: 180,
+                 width:400 ,
+                 child: ListView(
+                   shrinkWrap: true,
+                   scrollDirection: Axis.horizontal,
+                   children: [
+                     Container(
+                       padding: EdgeInsets.all(10),
+                       margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                       height: 150,
+                       width: 200,
+                       decoration: BoxDecoration(
+                         image: DecorationImage(
+                             image: AssetImage(car),
+                             fit: BoxFit.cover),
+                         borderRadius: BorderRadius.circular(10),
+
+                         color: Colors.white,
+                         boxShadow: [
+                           BoxShadow(
+                             offset: Offset(0,2),
+                             blurRadius: 2,
+                             color: Colors.black.withOpacity(0.2),
+                           ),
+                         ],
+
+                       ),
+                       child: Column(
+                         children: [
+                           Column(
+                             children: [
+                               Text("fdfdfd",style: GoogleFonts.poppins(
+                                 fontSize: 12,
+                                 fontWeight: FontWeight.bold
+                               ),)
+                             ],
+                           )
+
+                         ],
+                       ),
+                     ),
+                     Container(
+                       padding: EdgeInsets.all(10),
+                       margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                       height: 150,
+                       width: 200,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(10),
+                         color: Colors.white,
+                         boxShadow: [
+                           BoxShadow(
+                             offset: Offset(0,2),
+                             blurRadius: 2,
+                             color: Colors.black.withOpacity(0.2),
+                           ),
+                         ],
+
+                       ),
+                       child: Column(
+                         children: [
+                           Icon(Icons.bus_alert_outlined,size: 50,color: appcolor,),
+                           Text("Bus",style: GoogleFonts.poppins(
+                             fontWeight: FontWeight.bold,
+                             color: Colors.black ,
+                             fontSize:20 ,
+                           ),),
+                         ],
+                       ),
+                     ),
+                     Container(
+                       padding: EdgeInsets.all(10),
+                       margin: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+                       height: 150,
+                       width: 210,
+                       decoration: BoxDecoration(
+                         borderRadius: BorderRadius.circular(10),
+                         color: Colors.white,
+                         boxShadow: [
+                           BoxShadow(
+                             offset: Offset(0,2),
+                             blurRadius: 2,
+                             color: Colors.black.withOpacity(0.2),
+                           ),
+                         ],
+
+                       ),
+                       child: Column(
+                         children: [
+                           Icon(Icons.bus_alert_outlined,size: 50,color: appcolor,),
+                           Text("Bus",style: GoogleFonts.poppins(
+                             fontWeight: FontWeight.bold,
+                             color: Colors.black ,
+                             fontSize:20 ,
+                           ),),
+                         ],
+                       ),
+                     ),
+
+
+                   ],
+                 ),
+               ),
+
+                ],
+              ),
+
+            ),
+
+
+    ),
+
+
         bottomNavigationBar: NavigationBar(),
-      ),
+
     );
   }
   Widget MyDrawerList1(){

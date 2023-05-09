@@ -1,4 +1,4 @@
-const String tAppName="Easy Travel";
+const String tAppName="Easy Travels";
 const  String tAppTagligne="pour une\n reservation plus simple ";
 // On Boarding Text
 const String tOnBoardingTitle1="Contruire une app";
@@ -53,11 +53,11 @@ const String tOtpTitle="CO\nDE";
 const String tOtpsubitle="Verfication";
 const String tOtpMessage="Enter the verification code sent at";
 //dashboard Screen text
-const String tDashoardTitle="Hey,conding";
-const String tDashoardHeading="Explore Cours";
+const String tDashoardTitle="Hey,Explorer";
+const String tDashoardHeading="et trouver... ";
 const String tDashboardSearch="Search...";
 const String tDashboardBannerTitle1="Android for beginners";
 const String tDashboardBannerTitle2="Java";
 const String tDashboardBannersubTitle="10 lessons";
-const String tDashboardBannerButton="View All";
+const String tDashboardBannerButton="reserver";
 const String tDashboardTopCourses="Top Courses";

@@ -7,6 +7,8 @@ const String tOnboardingImagePage3="assets/images/on3.png";
 //welcome image string
 const String welcomeImage="assets/images/wel.png";
 const String forgetpassword="assets/images/password.png";
+const String bus="assets/images/bus.png";
+const String car="assets/images/car.jpg";
 //login image string
 const String loginimage="assets/images/log.png";
 const String  iconLogin="assets/images/google.png";
