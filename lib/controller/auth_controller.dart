@@ -16,6 +16,7 @@ bool phoneAuthCheck= false;
 dynamic credentials;
 
 phoneAuth(String phone) async{
+
   try{
     credentials=null;
       await FirebaseAuth.instance.verifyPhoneNumber(

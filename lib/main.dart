@@ -9,6 +9,7 @@ import 'package:taxiapp/views/login_screen.dart';
 import 'package:taxiapp/views/navbar.dart';
 import 'package:taxiapp/views/profile_settings.dart';
 import 'package:taxiapp/views/splash_screen.dart';
+import 'package:taxiapp/views/trajet.dart';
 
 import 'firebase_options.dart';
 
@@ -34,7 +35,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
+
       home:NavBar(),
+
+
+
+
+
+
     );
   }
 }

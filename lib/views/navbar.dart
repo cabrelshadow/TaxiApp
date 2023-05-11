@@ -25,7 +25,7 @@ class _NavBarState extends State<NavBar> {
          index: controller.tabIndex,
          children: const [
            HomeScreen(),
-           Trajet(),
+           TrajetList(),
          ],
 
        ) ,
