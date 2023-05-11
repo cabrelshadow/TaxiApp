@@ -29,6 +29,7 @@ class _NavBarState extends State<NavBar> {
          ],
 
        ) ,
+
        bottomNavigationBar:  BottomNavigationBar(
          currentIndex: controller.tabIndex,
          onTap: controller.changeTabIndex,

@@ -8,7 +8,7 @@ class AppPage{
   static List<GetPage> routes=[
     GetPage(name: navbar, page: ()=> const NavBar()),
     GetPage(name: home, page: ()=> const HomeScreen()),
-    GetPage(name: trajet, page: ()=> const Trajet()),
+    GetPage(name: trajet, page: ()=> const TrajetList()),
   ];
   static getnavbar()=>navbar;
   static gethome()=>home;
