@@ -32,7 +32,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
-      home: Splashscreen(),
+
+      home: Splashscreen(),//home sc
+
+
     );
   }
 }

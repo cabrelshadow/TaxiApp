@@ -134,17 +134,21 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
 
 
                       SizedBox( height: 30),
+
                     isLoading?Center(
                       child: LinearProgressIndicator(),
                     ) : greenButton('Register',(){
-                      if(!formKey.currentState!.validate()){
-                        return;
+
+                      if(selectedImage==null){
+                        Get.snackbar("warning", "svp veillez choisir une image");
                       }
                         setState(() {
 
                           isLoading=true;
                         });
                         storeUserInfo();
+
+
                       }),
                     ],
                   ),

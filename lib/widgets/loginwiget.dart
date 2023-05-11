@@ -71,6 +71,7 @@ Widget LogingWiget(CountryCode countryCode, Function OnCountryCharged,Function o
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 10),
                       child: TextField(
+                         keyboardType: TextInputType.number,
                          onSubmitted:(String? input)=>onSubmit(input) ,
 
 
