@@ -8,8 +8,8 @@ import '../constants/sizes.dart';
 import '../widgets/my_drawer_header.dart';
 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreens extends StatelessWidget {
+  const HomeScreens({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
