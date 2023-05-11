@@ -9,7 +9,7 @@ class AppConstants{
  static const String of = 'et';
  static const String privacyPolicy = 'conditon';
  static const String phoneVerification = 'Verification du numero de telephone';
- static const String enterOtp = 'Entre vote code OPT';
+ static const String enterOtp = 'Entre votre code OPT';
  static const String resendCode = 'Renvoyer le code';
  static const String seconds = 'seconds';
 

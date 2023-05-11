@@ -1,7 +1,10 @@
 import'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/constants/image_string.dart';
 import 'package:taxiapp/constants/text_strings.dart';
+import 'package:taxiapp/views/trajet.dart';
 
 import '../constants/colors.dart';
 import '../constants/sizes.dart';
@@ -28,7 +31,9 @@ class HomeScreen extends StatelessWidget {
 
               child: IconButton(
 
-                onPressed: (){},icon: Image(image: AssetImage(userIcon),),
+                onPressed: (){
+                  Get.to(TrajetList());
+                },icon: Image(image: AssetImage(userIcon),),
               ),
             )
           ],
