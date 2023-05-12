@@ -11,6 +11,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:taxiapp/views/trajet.dart';
 import '../constants/colors.dart';
 
+import '../constants/possitonGeographique.dart';
 import '../widgets/my_drawer_header.dart';
 
 
@@ -42,8 +43,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(CamerounDoualaLatitude, CamerounDoualaLongitude),
+
+
+zoom: 14.4746,
   );
 GoogleMapController? myMapController;
   @override

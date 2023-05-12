@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
 import 'package:taxiapp/views/homeScreen.dart';
+import 'package:taxiapp/views/navbar.dart';
 
 import '../utils/app_colors.dart';
 import '../widgets/green_intro_wiget.dart';
@@ -199,7 +200,7 @@ storeUserInfo()async{
       setState(() {
         isLoading=false;
       });
-      Get.to(()=> HomeScreen());
+      Get.to(()=>NavBar());
 
     });
 }

@@ -13,19 +13,13 @@ class TrajetList extends StatelessWidget {
     return Scaffold(
       appBar:AppBar(
         iconTheme: IconThemeData(color: Colors.black),
-        title: Text("trajet" ,style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 15,color:appcolor),),
-        centerTitle: true,
-        elevation: 2,
-        shadowColor: Colors.white,
+        title: Text("trajet" ,style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 17,color:appcolor),),
+        centerTitle: false,
+
+
         backgroundColor: Colors.white,
-        actions: [
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
 
 
-          )
-        ],
-        leading: Icon(Icons.arrow_back_outlined,color: Colors.black,),
       ) ,
       body: SingleChildScrollView(
            child: Container(

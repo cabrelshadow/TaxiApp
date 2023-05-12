@@ -5,6 +5,8 @@ import 'package:taxiapp/controller/controller.dart';
 import 'package:taxiapp/views/home.dart';
 import 'package:taxiapp/views/trajet.dart';
 import 'package:iconly/iconly.dart';
+import 'package:taxiapp/views/trajetdisponible.dart';
+import 'package:taxiapp/views/users.dart';
 
 import 'homeScreen.dart';
 
@@ -25,7 +27,8 @@ class _NavBarState extends State<NavBar> {
          index: controller.tabIndex,
          children: const [
            HomeScreen(),
-           TrajetList(),
+           Trajet(),
+           UserPage(),
          ],
 
        ) ,
@@ -39,6 +42,8 @@ class _NavBarState extends State<NavBar> {
          items: [
             _bottombarItem(IconlyBold.home, "home"),
             _bottombarItem(IconlyBold.ticket, "trajet"),
+
+            _bottombarItem(IconlyBold.user_2, "users"),
          ],
        ),
      );
