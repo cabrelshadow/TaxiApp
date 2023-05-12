@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/controller/auth_controller.dart';
+import 'package:taxiapp/routes/routes.dart';
 import 'package:taxiapp/views/homeScreen.dart';
 import 'package:taxiapp/views/login_screen.dart';
+import 'package:taxiapp/views/navbar.dart';
 import 'package:taxiapp/views/profile_settings.dart';
 import 'package:taxiapp/views/splash_screen.dart';
 import 'package:taxiapp/views/trajet.dart';
@@ -26,14 +28,19 @@ class MyApp extends StatelessWidget {
     AuthController authController =Get.put(AuthController());
     authController.decideRoute();
     final textTheme = Theme.of(context).textTheme;
-    return  GetMaterialApp(
+    return  GetMaterialApp(initialRoute: AppPage.getnavbar(),
+      getPages:AppPage.routes ,
 
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
 
-      home: Splashscreen(),//home sc
+      home:NavBar(),
+
+
+
+
 
 
     );

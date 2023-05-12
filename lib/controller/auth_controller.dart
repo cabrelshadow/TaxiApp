@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:taxiapp/views/navbar.dart';
 import 'package:taxiapp/views/profile_settings.dart';
 
 import '../views/homeScreen.dart';
@@ -68,7 +69,7 @@ decideRoute(){
         .then((value){
           if(value.exists){
              // redirect to homescreen
-            Get.to(()=>HomeScreen());
+            Get.to(()=>NavBar());
           }else{
              Get.to(()=>ProfileSettingScreen());
           }

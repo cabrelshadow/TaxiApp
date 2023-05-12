@@ -50,6 +50,7 @@ dependencies:
   google_maps_webservice:
   geolocator: ^9.0.2
   geocoding: ^2.1.0
+  iconly: ^1.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
