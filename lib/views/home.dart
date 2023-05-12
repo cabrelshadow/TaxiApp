@@ -11,8 +11,8 @@ import '../constants/sizes.dart';
 import '../widgets/my_drawer_header.dart';
 
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen1 extends StatelessWidget {
+  const HomeScreen1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -266,6 +266,7 @@ Widget NavigationBar() {
           topRight: Radius.circular(30),
         ),
         child: BottomNavigationBar(
+
           selectedItemColor:appcolor,
           selectedFontSize: 12,
           unselectedFontSize: 12,

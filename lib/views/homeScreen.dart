@@ -8,9 +8,9 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:taxiapp/constants/image_string.dart';
 import 'package:taxiapp/constants/text_strings.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:taxiapp/views/trajet.dart';
 import '../constants/colors.dart';
-import '../constants/sizes.dart';
-import '../utils/app_colors.dart';
+
 import '../widgets/my_drawer_header.dart';
 
 
@@ -22,6 +22,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+  final pages = [
+    const HomeScreen(),
+    const  TrajetList(),
+
+  ];
+
   String? _mapStyle;
 
   @override
@@ -55,7 +63,9 @@ GoogleMapController? myMapController;
 
               child: IconButton(
 
-                onPressed: (){},icon: Image(image: AssetImage(userIcon),),
+                onPressed: (){
+                  Get.to(TrajetList());
+                },icon: Image(image: AssetImage(userIcon),),
               ),
             )
           ],
@@ -78,25 +88,30 @@ GoogleMapController? myMapController;
             ),
           ),
         ),
-         body: Scaffold(
-           body: Stack(
-             children: [
-               GoogleMap(
-                 zoomControlsEnabled: false,
+         body: PageView(
 
-                 onMapCreated: (GoogleMapController controller){
+           children: [
+             Scaffold(
+               body: Stack(
+                 children: [
+                   GoogleMap(
+                     zoomControlsEnabled: false,
 
-                    myMapController=controller;
-                    myMapController!.setMapStyle(_mapStyle);
-                 },initialCameraPosition: _kGooglePlex,
+                     onMapCreated: (GoogleMapController controller){
+
+                        myMapController=controller;
+                        myMapController!.setMapStyle(_mapStyle);
+                     },initialCameraPosition: _kGooglePlex,
+                   ),
+
+                   builTextField(),
+                   builCurrentLocation(),
+                 ],
+
                ),
 
-               builTextField(),
-               builCurrentLocation(),
-             ],
-
-           ),
-
+             ),
+           ],
          ),
 
 
@@ -104,7 +119,11 @@ GoogleMapController? myMapController;
 
     );
   }
-  Widget  builCurrentLocation(){
+
+
+
+
+   Widget  builCurrentLocation(){
     return Align(
       alignment: Alignment.bottomRight,
       child: Padding(
@@ -124,7 +143,7 @@ GoogleMapController? myMapController;
 
     );
   }
-Widget builTextField(){
+   Widget builTextField(){
     return    Positioned(
       top: 40,
       left: 20,
@@ -172,7 +191,7 @@ Widget builTextField(){
 
 
 }
-void   showGoogleAutoComplete()async{
+   void   showGoogleAutoComplete()async{
     const kGoogleApiKey="AIzaSyDFNwu1OAxQtCP-cm3rplmIKBHI8SW1SPI";
     Prediction? p = await PlacesAutocomplete.show(
       offset: 0,
