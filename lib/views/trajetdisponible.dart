@@ -18,154 +18,140 @@ class Trajet extends StatelessWidget {
           backgroundColor: Colors.white,
           title: Text("Trajet" ,style: GoogleFonts.roboto(fontWeight: FontWeight.bold,fontSize: 20,color:appcolor),),
         ),
+             body: SingleChildScrollView(
+               child: Container(
+                 padding: EdgeInsets.all(10),
+                 child: Column(
+                   children: [
+                     builTextField(),
+                     SizedBox( height: 5,),
+                        Container(
+                            height: MediaQuery.of(context).size.height / 1.40,
+                          child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount:trajetlistitem.length,
+                          itemBuilder: (context,index){
+                            return Card(
 
-        body: SingleChildScrollView(
-           child: Container(
-             padding: EdgeInsets.only(top: 20),
-               child: Column(
-                 children: [
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
 
-                   Container(
-                     width: 400,
-                     height: 60,
-                     padding: EdgeInsets.only(top: 5),
-                     margin: EdgeInsets.symmetric(horizontal: 10),
-                     decoration: BoxDecoration(
-                       borderRadius: BorderRadius.only(
-                           topLeft: Radius.circular(20),
-                           bottomRight: Radius.circular(20)
-                       ),
-                       boxShadow: [
-                         BoxShadow(
-                           offset: Offset(0,3),
-                           blurRadius: 2,
-                           color: Colors.black.withOpacity(0.2),
-                         )
-                       ],
-                       color:appcolor,
-                     ),
-                     child: Row(
-                       mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
 
-                       children: [
-                         Column(
-
-                           children: [ Text("depart ",style: GoogleFonts.poppins(
-                               color: Colors.white,
-                               fontWeight: FontWeight.bold,
-                               fontSize: 18
-                           ),)],
-                         ),
-                         SizedBox(width: 50,),
-                         Icon(Icons.transfer_within_a_station,color: Colors.white,),
-                         SizedBox(width: 50,),
-                         Column(
-                           children: [ Text("arrivé ",style: GoogleFonts.poppins(
-                               color: Colors.white,
-                               fontWeight: FontWeight.bold,
-                               fontSize: 18
-                           ),)],
-                         ),
-                         SizedBox(height: 10,)
-                       ],
-                     ),
-                   ),
-                   SizedBox(height: 10,),
-                  SizedBox(
-                    height:Get.height,
-
-                     child:  ListView.builder(
-                         padding: EdgeInsets.all(10),
-                         shrinkWrap: true,
-                         scrollDirection: Axis.vertical,
-                         itemCount:trajetlistitem.length,
-                         itemBuilder: (context,index){
-                           return Card(
-                              color:appcolor,
-                             child: Container(
-                               padding: EdgeInsets.symmetric(vertical: 20),
-                               height: 180,
-                               width: 300,
-                               decoration: BoxDecoration(
-                                   borderRadius: BorderRadius.only(
-                                     bottomRight: Radius.circular(50)
-                                   ),
-                                   boxShadow: [
-                                     BoxShadow(
-
-                                         offset: Offset(0,3),
-                                         blurRadius: 2,
-                                         color: Colors.black.withOpacity(0.2)
-                                     ),
-
-                                   ],
-                                   color: Colors.white
-                               ),
-                               child: Row(
-
-                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                 children: [
-                                        Column(
-                                          children: [
-                                            Container(
-                                              margin: EdgeInsets.all(20),
-
-                                              child:Column(
-                                                  children: [
-                                                    Text(trajetlistitem[index].villeDepart,style: GoogleFonts.roboto(
-                                                      fontSize: 15,
-
-                                                    ),),
-                                                    SizedBox(height: 10,),
+                                      Image(image: AssetImage(trajetlistitem[index].image),height: 100,width: 100,),
+                                      SizedBox(width: 10,),
 
 
-                                                  ]
-                                              ) ,
-                                            )
-                                          ],
-                                        ),
-                                   Container(
-                                     margin: EdgeInsets.all(3),
-                                     child: Column(
-                                       children: [
-                                        Image(image: AssetImage(flech))
-                                       ],
-                                     ),
-                                   ),
-                                   Container(
-                                     margin: EdgeInsets.all(20),
-                                     child: Column(
-                                         children: [
-                                           Text(trajetlistitem[index].villeArriver,style: GoogleFonts.roboto(
-                                             fontSize: 15,
+                                      Text(trajetlistitem[index].villeDepart,style: GoogleFonts.roboto(
+                                        fontSize: 15,
 
-                                           ) ),
+                                      ),),
+                                      SizedBox(width: 10,),
+                                      Image(image: AssetImage(flech)),
+                                      SizedBox(width: 10,),
+                                      Text(trajetlistitem[index].villeArriver,style: GoogleFonts.roboto(
+                                        fontSize: 15,
+
+                                      ),),
 
 
-                                           SizedBox(height: 10,),
-                                           Text(trajetlistitem[index].villeArriver,style: GoogleFonts.roboto(
-                                             fontSize: 15,
+                                    ],
 
-                                           ) ),
-                                         ]
-                                     ),
-                                   ),
+                                  ),
+                                  SizedBox(height: 5,),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
 
-                                 ],
-                               ),
-                             ),
-                           );
-                         }
+                                      Image(image: AssetImage(heur), height: 30,width: 30,),
 
-                     ) ,
-                   ),
+                                      Text(trajetlistitem[index].heurArriver,style: GoogleFonts.roboto(
+                                        fontSize: 15,
+
+                                      ),),
 
 
-                 ],
+                                      SizedBox(width: 10,),
+                                      Text("${trajetlistitem[index].Prix.toString()}"+" "+"fcaf",style: GoogleFonts.roboto(
+                                        fontSize: 15,
+                                         fontWeight: FontWeight.bold,
+                                      ),),
+
+
+                                    ],
+
+                                  ),
+                                  SizedBox(height: 5,),
+                                ],
+
+                              ),
+
+                            );
+                          },
+                        )),
+
+                   ],
+                 ),
+
                ),
-           ),
-        ),
+             ),
       ),
     );
   }
+}
+Widget builTextField(){
+  return    Positioned(
+    top: 20,
+    left: 20,
+    right: 20,
+    child: Container(
+      width: Get.width,
+      padding: EdgeInsets.only(left: 10),
+      // height: 50,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                spreadRadius: 1,
+                blurRadius: 1)
+          ],
+          borderRadius: BorderRadius.circular(8)),
+      child: TextFormField(
+        //vallidate imput
+
+        onTap: (){
+
+        },
+        //appel de la function validator passer en parametre
+
+        style: GoogleFonts.poppins(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
+            color: Color(0xffA7A7A7)),
+        decoration: InputDecoration(
+          hintText: "rechercher un trajet",
+
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Icon(
+              Icons.search,
+
+            ),
+          ),
+          border: InputBorder.none,
+        ),
+      ),
+    ),
+  );
+
+
 }

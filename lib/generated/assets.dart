@@ -9,20 +9,26 @@ class Assets {
   static const String assetsDriver = 'assets/driver.png';
   static const String assetsGreenTaxi = 'assets/greenTaxi.svg';
   static const String assetsLeaf = 'assets/leaf.svg';
-
+  static const String assetsLeaf icon = 'assets/leaf icon.svg';
   static const String assetsMapStyle = 'assets/map_style.txt';
   static const String assetsMask = 'assets/mask.png';
-
+  static const String assetsMask Group 2 = 'assets/Mask Group 2.png';
   static const String assetsPerson = 'assets/person.png';
   static const String assetsR = 'assets/r.png';
   static const String assetsSource = 'assets/source.gif';
   static const String assetsVisa = 'assets/visa.png';
+  static const String imagesArrow = 'assets/images/arrow.png';
+  static const String imagesBus = 'assets/images/bus.png';
+  static const String imagesCar = 'assets/images/car.jpg';
+  static const String imagesFleche = 'assets/images/fleche.png';
   static const String imagesG = 'assets/images/g.png';
   static const String imagesGd = 'assets/images/gd.png';
+  static const String imagesGo = 'assets/images/go.png';
   static const String imagesGoogle = 'assets/images/google.png';
   static const String imagesGreenTaxi = 'assets/images/greenTaxi.svg';
+  static const String imagesHeur = 'assets/images/heur.png';
   static const String imagesLeaf = 'assets/images/leaf.svg';
-
+  static const String imagesLeaf icon = 'assets/images/leaf icon.svg';
   static const String imagesLog = 'assets/images/log.png';
   static const String imagesMenu = 'assets/images/menu.png';
   static const String imagesOn1 = 'assets/images/on1.png';
