@@ -25,7 +25,7 @@ class TrajetList extends StatelessWidget {
 
           )
         ],
-        leading: Icon(Icons.arrow_back_outlined,color: Colors.black,),
+        leading:InkWell(onTap: (){Get.back();}, child: Icon(Icons.arrow_back_outlined,color: Colors.black,)),
       ) ,
       body: SingleChildScrollView(
            child: Container(
