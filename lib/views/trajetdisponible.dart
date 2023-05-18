@@ -4,9 +4,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/constants/image_string.dart';
 import 'package:taxiapp/models/trajetmodels/trajetmodel.dart';
+import 'package:taxiapp/views/detailtrajet.dart';
+import 'package:taxiapp/views/users.dart';
 
 import '../constants/colors.dart';
 class Trajet extends StatelessWidget {
+  
   const Trajet({Key? key}) : super(key: key);
 
   @override
@@ -32,68 +35,75 @@ class Trajet extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           itemCount:trajetlistitem.length,
                           itemBuilder: (context,index){
-                            return Card(
+                            return InkWell(
+                              onTap: (){
+                                Navigator.of(context)
+                                    .push(MaterialPageRoute(
+                                     builder: (context)=>DetailTrajet(trajetmodel: trajetlistitem[index],),));
+                              },
+                              child: Card(
+                                     
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
 
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
 
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-
-                                      Image(image: AssetImage(trajetlistitem[index].image),height: 100,width: 100,),
-                                      SizedBox(width: 10,),
-
-
-                                      Text(trajetlistitem[index].villeDepart,style: GoogleFonts.roboto(
-                                        fontSize: 15,
-
-                                      ),),
-                                      SizedBox(width: 10,),
-                                      Image(image: AssetImage(flech)),
-                                      SizedBox(width: 10,),
-                                      Text(trajetlistitem[index].villeArriver,style: GoogleFonts.roboto(
-                                        fontSize: 15,
-
-                                      ),),
+                                        Image(image: AssetImage(trajetlistitem[index].image),height: 100,width: 100,),
+                                        SizedBox(width: 10,),
 
 
-                                    ],
+                                        Text(trajetlistitem[index].villeDepart,style: GoogleFonts.roboto(
+                                          fontSize: 15,
 
-                                  ),
-                                  SizedBox(height: 5,),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
+                                        ),),
+                                        SizedBox(width: 10,),
+                                        Image(image: AssetImage(flech)),
+                                        SizedBox(width: 10,),
+                                        Text(trajetlistitem[index].villeArriver,style: GoogleFonts.roboto(
+                                          fontSize: 15,
 
-                                      Image(image: AssetImage(heur), height: 30,width: 30,),
-
-                                      Text(trajetlistitem[index].heurArriver,style: GoogleFonts.roboto(
-                                        fontSize: 15,
-
-                                      ),),
+                                        ),),
 
 
-                                      SizedBox(width: 10,),
-                                      Text("${trajetlistitem[index].Prix.toString()}"+" "+"fcaf",style: GoogleFonts.roboto(
-                                        fontSize: 15,
-                                         fontWeight: FontWeight.bold,
-                                      ),),
+                                      ],
+
+                                    ),
+                                    SizedBox(height: 5,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+
+                                        Image(image: AssetImage(heur), height: 30,width: 30,),
+
+                                        Text(trajetlistitem[index].heurArriver,style: GoogleFonts.roboto(
+                                          fontSize: 15,
+
+                                        ),),
 
 
-                                    ],
+                                        SizedBox(width: 10,),
+                                        Text("${trajetlistitem[index].Prix.toString()}"+" "+"fcaf",style: GoogleFonts.roboto(
+                                          fontSize: 15,
+                                           fontWeight: FontWeight.bold,
+                                        ),),
 
-                                  ),
-                                  SizedBox(height: 5,),
-                                ],
+
+                                      ],
+
+                                    ),
+                                    SizedBox(height: 5,),
+                                  ],
+
+                                ),
 
                               ),
-
                             );
                           },
                         )),

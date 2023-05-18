@@ -13,6 +13,7 @@ import '../constants/colors.dart';
 
 import '../constants/possitonGeographique.dart';
 import '../widgets/my_drawer_header.dart';
+import 'drawerpage.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -74,23 +75,7 @@ GoogleMapController? myMapController;
           ],
 
         ) ,
-        drawer: Drawer(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20)),
-          ),
-          child: SingleChildScrollView(
-            child: Container(
-              child: Column(
-                  children: [
-                    MyHeaderDrawer(),
-                    MyDrawerList1(),
-                  ],
-              ),
-            ),
-          ),
-        ),
+        drawer:DrawerNavigator(),
          body: PageView(
 
            children: [
@@ -197,12 +182,12 @@ GoogleMapController? myMapController;
       offset: 0,
         radius: 1000,
         strictbounds: false,
-        region: "us",
+        region: "cmr",
         context: context,
         apiKey: kGoogleApiKey,
       mode: Mode.overlay,
       language: "en",
-      components: [new Component(Component.country, "us")],
+      components: [new Component(Component.country, "cmr")],
       types: ["(cities)"],
       hint: "rechercher une ville"
     );
