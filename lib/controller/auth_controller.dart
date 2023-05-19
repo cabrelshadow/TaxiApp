@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:taxiapp/models/userModels/user_model.dart';
 import 'package:taxiapp/views/navbar.dart';
 import 'package:taxiapp/views/profile_settings.dart';
 
@@ -78,4 +79,20 @@ decideRoute(){
 
   }
 }
+
+//get user information from firebase//
+  //create a instance of model
+var  myuser=UserModel(
+
+).obs;
+  getUser(){
+  //get current id of users
+    String uid=FirebaseAuth.instance.currentUser!.uid;
+  FirebaseFirestore.instance.collection('users').doc(uid).snapshots().listen((event) {
+
+      myuser.value=UserModel.fromJson(event.data()!);
+
+  });
+  }
+
 }

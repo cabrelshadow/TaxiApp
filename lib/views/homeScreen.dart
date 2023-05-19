@@ -8,6 +8,7 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:taxiapp/constants/image_string.dart';
 import 'package:taxiapp/constants/text_strings.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:taxiapp/controller/auth_controller.dart';
 import 'package:taxiapp/views/trajet.dart';
 import '../constants/colors.dart';
 
@@ -25,18 +26,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-
-  final pages = [
-    const HomeScreen(),
-    const  TrajetList(),
-
-  ];
-
   String? _mapStyle;
 
   @override
+  AuthController authController= Get.find<AuthController>();
+
   void initState(){
     super.initState();
+   authController.getUser();
     rootBundle.loadString('assets/map_style.text').then((String){
       _mapStyle=String;
 

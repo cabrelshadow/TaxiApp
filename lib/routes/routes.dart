@@ -8,7 +8,7 @@ import 'package:taxiapp/views/users.dart';
 import '../views/homeScreen.dart';
 class AppPage{
   static List<GetPage> routes=[
-    GetPage(name: navbar, page: ()=> const NavBar()),
+    GetPage(name: navbar, page: ()=>  NavBar()),
     GetPage(name: home, page: ()=> const HomeScreen()),
     GetPage(name: trajetdisponible, page: ()=> const Trajet()),
     GetPage(name: user, page: ()=> const UserPage()),

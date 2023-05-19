@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 import 'package:taxiapp/constants/colors.dart';
+import 'package:taxiapp/views/profile_settings.dart';
 import 'package:taxiapp/views/users.dart';
 
 import '../constants/image_string.dart';
+import '../controller/auth_controller.dart';
 class DrawerNavigator extends StatefulWidget {
   const DrawerNavigator({Key? key}) : super(key: key);
 
@@ -15,26 +17,36 @@ class DrawerNavigator extends StatefulWidget {
 }
 
 class _DrawerNavigatorState extends State<DrawerNavigator> {
+  AuthController authController= Get.find<AuthController>();
   @override
+  void initState(){
+    super.initState();
+    authController.getUser();
+
+  }
   Widget build(BuildContext context) {
     return Drawer(
       
       child: ListView(
         children:  [
           UserAccountsDrawerHeader(
-            
-            accountName: Text("cabrel sianou"),
-            accountEmail: Text("sianou93@gmail.com"),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor:Colors.transparent,
-                    child: ClipOval(
-                        child: Image(image:   AssetImage(profile,),fit:BoxFit.cover ,height: 100 ,width: 100,)),
 
-                    ),
-            decoration: BoxDecoration(
-              color: appcolor,
-            ),
-            ),
+              accountName: Text(authController.myuser.value.Unom!),
+              accountEmail: Text(authController.myuser.value.Uprenom!),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor:Colors.transparent,
+                      child: InkWell(
+                        onTap:()=>Get.to(ProfileSettingScreen()),
+                        child: ClipOval(
+                            child: Image(image:  NetworkImage(authController.myuser.value.Uimage!),fit:BoxFit.cover ,height: 100 ,width: 100,)),
+                      ),
+
+                      ),
+              decoration: BoxDecoration(
+                color: appcolor,
+              ),
+              ),
+
             ListTile(
               leading:Icon(Icons.supervised_user_circle_sharp,size: 30,color: appcolor,),
               title: Text("user profile",style: GoogleFonts.poppins(

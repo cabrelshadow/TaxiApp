@@ -8,10 +8,11 @@ import 'package:iconly/iconly.dart';
 import 'package:taxiapp/views/trajetdisponible.dart';
 import 'package:taxiapp/views/users.dart';
 
+import '../controller/auth_controller.dart';
 import 'homeScreen.dart';
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+   NavBar({Key? key}) : super(key: key);
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -19,7 +20,9 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   final controller= Get.put(NavbarController());
+
   @override
+
   Widget build(BuildContext context) {
    return GetBuilder<NavbarController>(builder: (context){
      return Scaffold(
