@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void initState(){
     super.initState();
-   authController.getUser();
+
     rootBundle.loadString('assets/map_style.text').then((String){
       _mapStyle=String;
 

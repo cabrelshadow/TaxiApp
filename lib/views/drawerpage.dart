@@ -26,19 +26,19 @@ class _DrawerNavigatorState extends State<DrawerNavigator> {
   }
   Widget build(BuildContext context) {
     return Drawer(
-      
+       width: 250,
       child: ListView(
         children:  [
           UserAccountsDrawerHeader(
 
-              accountName: Text(authController.myuser.value.Unom!),
-              accountEmail: Text(authController.myuser.value.Uprenom!),
+              accountName: Text(authController.myuser.value.Unom?? ""),
+              accountEmail: Text(authController.myuser.value.Uprenom?? ""),
               currentAccountPicture: CircleAvatar(
                 backgroundColor:Colors.transparent,
                       child: InkWell(
                         onTap:()=>Get.to(ProfileSettingScreen()),
                         child: ClipOval(
-                            child: Image(image:  NetworkImage(authController.myuser.value.Uimage!),fit:BoxFit.cover ,height: 100 ,width: 100,)),
+                            child: Image(image:  NetworkImage(authController.myuser.value.Uimage?? ""),fit:BoxFit.cover ,height: 100 ,width: 100,)),
                       ),
 
                       ),

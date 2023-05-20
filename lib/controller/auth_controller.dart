@@ -10,6 +10,7 @@ import 'package:taxiapp/views/profile_settings.dart';
 
 import '../views/homeScreen.dart';
 class AuthController extends GetxController{
+  final _db=FirebaseFirestore.instance;
 String userId='';
 var verId='';
 int? resendTokenId;
@@ -83,6 +84,10 @@ decideRoute(){
 //get user information from firebase//
   //create a instance of model
 var  myuser=UserModel(
+    Unom: '',
+    Uprenom: '',
+    Uadresse: '',
+    Uimage: ''
 
 ).obs;
   getUser(){
@@ -94,5 +99,6 @@ var  myuser=UserModel(
 
   });
   }
+
 
 }
