@@ -12,7 +12,18 @@ class Sierge extends GetView<SierGeController>{
   @override
 SierGeController controller =Get.put(SierGeController());
   Widget build(BuildContext context) {
+
     return Scaffold(
+      appBar:AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Text('liste des place' ,style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 15,color:appcolor),),
+        centerTitle: true,
+        elevation: 2,
+        shadowColor: Colors.white,
+        backgroundColor: Colors.white,
+
+
+      ),
       body: Stack(
         children: [
         Container(

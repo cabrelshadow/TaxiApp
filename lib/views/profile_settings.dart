@@ -10,6 +10,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as Path;
+import 'package:taxiapp/constants/colors.dart';
 import 'package:taxiapp/views/homeScreen.dart';
 import 'package:taxiapp/views/navbar.dart';
 
@@ -264,7 +265,7 @@ bool isLoading=false;
       minWidth: Get.width,
       height: 50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      color: AppColors.greenColor,
+      color: appcolor,
       onPressed: () => onPressed(),
       child: Text(
         title,

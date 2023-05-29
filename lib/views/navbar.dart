@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:taxiapp/constants/colors.dart';
 import 'package:taxiapp/controller/controller.dart';
 import 'package:taxiapp/views/home.dart';
+import 'package:taxiapp/views/show_trajet.dart';
 import 'package:taxiapp/views/trajet.dart';
 import 'package:iconly/iconly.dart';
 import 'package:taxiapp/views/trajetdisponible.dart';
 import 'package:taxiapp/views/users.dart';
 
 import '../controller/auth_controller.dart';
+import 'create_trajets.dart';
 import 'homeScreen.dart';
 
 class NavBar extends StatefulWidget {
@@ -28,10 +30,11 @@ class _NavBarState extends State<NavBar> {
      return Scaffold(
        body:IndexedStack(
          index: controller.tabIndex,
-         children: const [
+         children:  [
            HomeScreen(),
-           Trajet(),
+           TrajetsListScreen(),
            UserPage(),
+           CreateTrajet(),
          ],
 
        ) ,
@@ -47,6 +50,7 @@ class _NavBarState extends State<NavBar> {
             _bottombarItem(IconlyBold.ticket, "trajet"),
 
             _bottombarItem(IconlyBold.user_2, "users"),
+            _bottombarItem(IconlyBold.arrow_down_circle, "add"),
          ],
        ),
      );
