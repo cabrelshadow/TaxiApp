@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 class SierGeController extends GetxController{
   static SierGeController get instance=>Get.find();
@@ -6,6 +7,13 @@ class SierGeController extends GetxController{
   void gantiGerbon(int indexGerbonTerpilih){
      indexGerbon.value=indexGerbonTerpilih;
      gerbon.refresh();
+     FirebaseFirestore.instance.collection('NumeroSierge').add({
+
+       'Numero':indexGerbonTerpilih
+
+     }).then((value){
+      print("numero de siege enregistrer avec success");
+     });
 
   }
   void reset(){
@@ -29,7 +37,7 @@ gerbon.refresh();
   }
 
   var gerbon=List.generate(
-      6, (indexG) =>List<Map<String,dynamic>>.generate(75,
+      6, (indexG) =>List<Map<String,dynamic>>.generate(40,
               (indexP){
             if(indexG==0){
 

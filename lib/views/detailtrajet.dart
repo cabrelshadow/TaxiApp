@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -6,24 +8,36 @@ import 'package:taxiapp/views/sierge.dart';
 import 'package:taxiapp/views/test.dart';
 
 import '../constants/colors.dart';
+import '../controller/auth_controller.dart';
 import '../models/trajetmodels/trajetmodel.dart';
 
 class DetailTrajet extends StatefulWidget {
 
   final  Trajet trajet;
-  const DetailTrajet({Key? key, required this.trajet,}) : super(key: key);
+ DetailTrajet({Key? key, required this.trajet,}) : super(key: key);
 
   @override
   State<DetailTrajet> createState() => _DetailTrajetState();
+
+
+
 }
 
 class _DetailTrajetState extends State<DetailTrajet> {
   get  index => null;
-
-
-
+  AuthController authController= Get.find<AuthController>();
   @override
+  void initState(){
+    super.initState();
+    authController.getUser();
+
+  }
   Widget build(BuildContext context) {
+
+    var villedepart= widget.trajet.villeDepart;
+    var villeArriver= widget.trajet.villeArrivee;
+    var villeheurDepart= widget.trajet.heureDepart;
+    var prix= widget.trajet.prix;
     return Scaffold(
       appBar: AppBar(
         title: Text("detail trajet  " ,style: GoogleFonts.poppins( fontSize: 16),),
@@ -66,7 +80,7 @@ class _DetailTrajetState extends State<DetailTrajet> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const [
                     Text('Ville de départ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                     Text('Ville d\'arrivée', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   ],
@@ -85,6 +99,7 @@ class _DetailTrajetState extends State<DetailTrajet> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+
                     Text('Heure de départ: ${widget.trajet.heureDepart}', style:GoogleFonts.poppins( fontSize: 14)),
                     Text('${widget.trajet.prix} Fcfa',  style:GoogleFonts.poppins( fontSize: 14)),
                   ],
@@ -92,16 +107,33 @@ class _DetailTrajetState extends State<DetailTrajet> {
                 SizedBox(height: 10),
                 Divider(color: Colors.grey),
                 SizedBox(height: 10),
+                Divider(color: Colors.grey),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+
+
+                    // Générer 10 nombres aléatoires
+
                     Text('Siège Numero :',style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14),),
-                    Text('50', style:GoogleFonts.poppins( fontSize: 14)),
+                    Text('${RandomNumberGenerator.generateRandomNumber().toString()}', style:GoogleFonts.poppins( fontSize: 14)),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+
+
+                    // Générer 10 nombres aléatoires
+
+                    Text('Nom du client :',style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14),),
+                    Text('${authController.myuser.value.Unom?? ""}', style:GoogleFonts.poppins( fontSize: 14)),
                   ],
                 ),
                 SizedBox(height: 40,),
-                greenButton("Reserver maintenant",(){
-                  Get.to(Sierge());
+                greenButton("Selectioner votre siège",(){
+                  Get.to(ClientPlace());
+
                 })
               ],
             ),
@@ -113,7 +145,9 @@ class _DetailTrajetState extends State<DetailTrajet> {
       ),
     );
   }
+
 }
+
 Widget greenButton(String title, Function onPressed) {
   return MaterialButton(
     minWidth: Get.width,
@@ -127,6 +161,23 @@ Widget greenButton(String title, Function onPressed) {
           fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
     ),
   );
+  
+}
+class RandomNumberGenerator {
+  static final _random = Random();
+  static final Set<int> _generatedNumbers = {};
+
+  static int generateRandomNumber() {
+    int randomNumber;
+
+    do {
+      randomNumber = _random.nextInt(50) + 1;
+    } while (_generatedNumbers.contains(randomNumber));
+
+    _generatedNumbers.add(randomNumber);
+
+    return randomNumber;
+  }
 }
 
 
