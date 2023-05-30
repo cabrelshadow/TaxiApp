@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -9,6 +11,7 @@ import 'package:taxiapp/views/test.dart';
 
 import '../constants/colors.dart';
 import '../controller/auth_controller.dart';
+import '../controller/revervation_controller.dart';
 import '../models/trajetmodels/trajetmodel.dart';
 
 class DetailTrajet extends StatefulWidget {
@@ -36,8 +39,10 @@ class _DetailTrajetState extends State<DetailTrajet> {
 
     var villedepart= widget.trajet.villeDepart;
     var villeArriver= widget.trajet.villeArrivee;
-    var villeheurDepart= widget.trajet.heureDepart;
+    var heurDepart= widget.trajet.heureDepart;
     var prix= widget.trajet.prix;
+     var nomclient=authController.myuser.value.Unom;
+    DateTime date=DateTime.now();
     return Scaffold(
       appBar: AppBar(
         title: Text("detail trajet  " ,style: GoogleFonts.poppins( fontSize: 16),),
@@ -131,10 +136,15 @@ class _DetailTrajetState extends State<DetailTrajet> {
                   ],
                 ),
                 SizedBox(height: 40,),
-                greenButton("Selectioner votre siège",(){
-                  Get.to(ClientPlace());
+                isLoading?Center(
+                  child:CircularProgressIndicator( color: appcolor,),
+                ) : greenButton('Enregistrer',(){
 
-                })
+                  setState(() {
+                    isLoading=true;
+                  });
+                  storeUserInfo();
+                }),
               ],
             ),
 
@@ -145,9 +155,62 @@ class _DetailTrajetState extends State<DetailTrajet> {
       ),
     );
   }
+  storeUserInfo()async{
+    DateTime date=DateTime.now();
+    String uid=FirebaseAuth.instance.currentUser!.uid;
+    FirebaseFirestore.instance.collection('ClientReservation').doc(uid).set({
+      'nom_utilisateur':authController.myuser.value.Unom,
+      'villedepart':widget.trajet.villeDepart,
+      'villeArriver':widget.trajet.villeArrivee,
+      'heurDepart': widget.trajet.heureDepart,
+      'prix': widget.trajet.prix,
+      'date': date.toString(),
+
+    }).then((value){
+
+
+      setState(() {
+        isLoading=false;
+      });
+       _successsMessage(context);
+
+    });
+  }
+  bool isLoading=false;
 
 }
+_successsMessage(BuildContext context){
+  return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Container(
+        padding: EdgeInsets.all(8),
+        height: 80,
+        decoration: BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(children: [
+          Icon(Icons.check_circle,color: Colors.white,size: 40,),
+          SizedBox(width: 20,),
+          Expanded(child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Succès",style: GoogleFonts.poppins(),),
+              Spacer(),
+              Text("trajet creer avec succes!",style: GoogleFonts.poppins(),),
+            ],
+          ))
+        ],),
+      )
+          ,behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          duration:Duration(seconds: 4),
+          dismissDirection: DismissDirection.vertical
 
+
+      )
+  );
+}
 Widget greenButton(String title, Function onPressed) {
   return MaterialButton(
     minWidth: Get.width,
@@ -161,7 +224,7 @@ Widget greenButton(String title, Function onPressed) {
           fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
     ),
   );
-  
+
 }
 class RandomNumberGenerator {
   static final _random = Random();
@@ -178,6 +241,7 @@ class RandomNumberGenerator {
 
     return randomNumber;
   }
+
 }
 
 
