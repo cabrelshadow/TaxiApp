@@ -10,6 +10,7 @@ import 'package:iconly/iconly.dart';
 import 'package:taxiapp/views/users.dart';
 
 import 'create_trajets.dart';
+import 'historique_trajet.dart';
 import 'homeScreen.dart';
 
 class NavBar extends StatefulWidget {
@@ -33,6 +34,7 @@ class _NavBarState extends State<NavBar> {
            HomeScreen(),
            TrajetsListScreen(),
            UserPage(),
+           HistoriqueTrajet(),
            CreateTrajet(),
          ],
 
@@ -49,6 +51,7 @@ class _NavBarState extends State<NavBar> {
             _bottombarItem(IconlyBold.ticket, "trajet"),
 
             _bottombarItem(IconlyBold.user_2, "users"),
+            _bottombarItem(IconlyBold.time_circle, "historique"),
             _bottombarItem(IconlyBold.arrow_down_circle, "add"),
          ],
        ),

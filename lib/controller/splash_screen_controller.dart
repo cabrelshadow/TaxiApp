@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:taxiapp/routes/verifie_user_login.dart';
 
 import '../views/login_screen.dart';
 
@@ -16,7 +17,7 @@ class SplashScreenController extends GetxController{
     await Future.delayed(Duration(milliseconds: 500));
 animate.value =true;
     await Future.delayed(Duration(milliseconds: 3000));
-    Get.to(LoginScreen());
+    Get.to(UserAuthVerifie());
 //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>WelcomePage(),);
   }
 }

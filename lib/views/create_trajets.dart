@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../utils/app_colors.dart';
-import '../widgets/green_intro_wiget.dart';
+import '../../utils/app_colors.dart';
+
 
 class CreateTrajet extends StatefulWidget {
   const CreateTrajet({Key? key}) : super(key: key);
@@ -21,6 +21,7 @@ class _CreateTrajetState extends State<CreateTrajet> {
   TextEditingController VilleArriverController = TextEditingController();
   TextEditingController HeurDepartController = TextEditingController();
   TextEditingController PrixController = TextEditingController();
+  TextEditingController DateVoyageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,26 +35,26 @@ class _CreateTrajetState extends State<CreateTrajet> {
               height: Get.height*0.4,
               child: Stack(
                 children: [
-                Container(
-                width: Get.width,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/r.png'),
-                        fit: BoxFit.fill
-                    )
-                ),
-                height:250,
-                child: Container(
-                  height: Get.height*0.1,
-                  width: Get.width,
-                  margin: EdgeInsets.only(bottom: Get.height*0.05),
-                  child: Center(
-                    child: Text("creer un trajet",
-                      style: GoogleFonts.poppins(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),
+                  Container(
+                    width: Get.width,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/r.png'),
+                            fit: BoxFit.fill
+                        )
                     ),
-                  ),
-                ),
-              )
+                    height:250,
+                    child: Container(
+                      height: Get.height*0.1,
+                      width: Get.width,
+                      margin: EdgeInsets.only(bottom: Get.height*0.05),
+                      child: Center(
+                        child: Text("creer un trajet",
+                          style: GoogleFonts.poppins(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  )
 
 
 
@@ -104,6 +105,12 @@ class _CreateTrajetState extends State<CreateTrajet> {
                         }
                         return null;
                       }),
+                      TextFieldWidget('date du voyage',  Icons.price_change, DateVoyageController,(String,input){
+                        if(input!.isEmpty){
+                          return "le champs ville de residance  est obligatoir";
+                        }
+                        return null;
+                      }),
                       SizedBox( height: 10),
 
 
@@ -113,9 +120,6 @@ class _CreateTrajetState extends State<CreateTrajet> {
                         child:CircularProgressIndicator(),
                       ) : greenButton('Enregistrer',(){
 
-                        setState(() {
-                          isLoading=true;
-                        });
                         SaveTrajetInfo();
 
 
@@ -134,13 +138,19 @@ class _CreateTrajetState extends State<CreateTrajet> {
 
   SaveTrajetInfo()async{
 
-   // String uid=FirebaseAuth.instance.currentUser!.uid;
+    // String uid=FirebaseAuth.instance.currentUser!.uid;
+    showDialog(context: context, builder:(context){
+      return Center(
+        child: CircularProgressIndicator(),
+      );
+    });
     FirebaseFirestore.instance.collection('trajets').add({
 
       'villeDepart':villdDepartController.text,
       'villeArriver':VilleArriverController.text,
       'heurDepart':HeurDepartController.text,
       'Prix':PrixController.text,
+      'Datevoyage':DateVoyageController.text,
 
 
     }).then((value){
@@ -148,12 +158,11 @@ class _CreateTrajetState extends State<CreateTrajet> {
       VilleArriverController.clear();
       HeurDepartController.clear();
       PrixController.clear();
+      DateVoyageController.clear();
 
 
 
-      setState(() {
-        isLoading=false;
-      });
+      Navigator.pop(context);
       _successsMessage(context);
     });
   }
@@ -233,10 +242,10 @@ class _CreateTrajetState extends State<CreateTrajet> {
             ))
           ],),
         )
-        ,behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          duration:Duration(seconds: 4),
+            ,behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            duration:Duration(seconds: 4),
             dismissDirection: DismissDirection.vertical
 
 

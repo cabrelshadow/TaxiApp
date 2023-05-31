@@ -20,3 +20,4 @@ const String  flech="assets/images/arrow.png";
 const String  heur="assets/images/heur.png";
 const String  go="assets/images/go.png";
 const String  bgplace="assets/images/bg.png";
+const String  notfound="assets/not1.png";

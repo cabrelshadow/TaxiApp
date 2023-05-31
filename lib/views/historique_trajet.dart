@@ -5,16 +5,15 @@ import 'package:google_fonts/google_fonts.dart';
 import '../constants/colors.dart';
 import '../constants/image_string.dart';
 import '../models/trajetmodels/trajetmodel.dart';
-import 'detailtrajet.dart';
 
+class HistoriqueTrajet extends StatefulWidget {
+  const HistoriqueTrajet({Key? key}) : super(key: key);
 
-
-class TrajetsListScreen extends StatefulWidget {
   @override
-  _TrajetsListScreenState createState() => _TrajetsListScreenState();
+  State<HistoriqueTrajet> createState() => _HistoriqueTrajetState();
 }
 
-class _TrajetsListScreenState extends State<TrajetsListScreen> {
+class _HistoriqueTrajetState extends State<HistoriqueTrajet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
         centerTitle: true,
         elevation: 1,
         backgroundColor: Colors.white,
-        title: Text(" liste des trajet" ,style: GoogleFonts.roboto(fontWeight: FontWeight.bold,fontSize: 17,color:appcolor),),
+        title: Text("historique reservation" ,style: GoogleFonts.roboto(fontWeight: FontWeight.bold,fontSize: 17,color:appcolor),),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('trajets').snapshots(),
@@ -35,7 +34,7 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
                 Container(
                   padding: EdgeInsets.only(top:150),
                   child: Center(
-                    child: Text("pas de trajet disponible !!",style: GoogleFonts.poppins(
+                    child: Text("historique vide !!",style: GoogleFonts.poppins(
                       fontSize: 15,
                     ),),
                   ),
@@ -55,9 +54,9 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
                 return InkWell(
 
                   onTap: (){
-                    Navigator.of(context)
+                   /* Navigator.of(context)
                         .push(MaterialPageRoute(
-                      builder: (context)=>DetailTrajet(trajet:trajets[index] ,),));
+                      builder: (context)=>DetailTrajet(trajet:trajets[index] ,),));*/
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),
@@ -128,4 +127,3 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
     );
   }
 }
-

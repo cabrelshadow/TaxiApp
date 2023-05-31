@@ -1,17 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+
 
 class Trajet {
   final String villeDepart;
   final String villeArrivee;
   final String heureDepart;
   final String prix;
+  final String dateVoyage;
 
   Trajet({
     required this.villeDepart,
     required this.villeArrivee,
     required this.heureDepart,
     required this.prix,
+    required this.dateVoyage,
   });
 
   factory Trajet.fromFirestore(DocumentSnapshot document) {
@@ -21,6 +23,7 @@ class Trajet {
       villeArrivee: data['villeArriver'],
       heureDepart: data['heurDepart'],
       prix: data['Prix'],
+      dateVoyage: data['Datevoyage'],
     );
   }
 }

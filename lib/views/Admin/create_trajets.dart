@@ -21,6 +21,7 @@ class _CreateTrajetState extends State<CreateTrajet> {
   TextEditingController VilleArriverController = TextEditingController();
   TextEditingController HeurDepartController = TextEditingController();
   TextEditingController PrixController = TextEditingController();
+  TextEditingController DateVoyageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +105,12 @@ class _CreateTrajetState extends State<CreateTrajet> {
                         }
                         return null;
                       }),
+                      TextFieldWidget('date du voyage',  Icons.price_change, DateVoyageController,(String,input){
+                        if(input!.isEmpty){
+                          return "le champs ville de residance  est obligatoir";
+                        }
+                        return null;
+                      }),
                       SizedBox( height: 10),
 
 
@@ -143,6 +150,7 @@ class _CreateTrajetState extends State<CreateTrajet> {
       'villeArriver':VilleArriverController.text,
       'heurDepart':HeurDepartController.text,
       'Prix':PrixController.text,
+      'Datevoyage':DateVoyageController.text,
 
 
     }).then((value){
@@ -150,6 +158,7 @@ class _CreateTrajetState extends State<CreateTrajet> {
       VilleArriverController.clear();
       HeurDepartController.clear();
       PrixController.clear();
+      DateVoyageController.clear();
 
 
 

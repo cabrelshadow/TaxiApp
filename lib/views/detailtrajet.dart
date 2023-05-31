@@ -164,6 +164,7 @@ class _DetailTrajetState extends State<DetailTrajet> {
       'villeArriver':widget.trajet.villeArrivee,
       'heurDepart': widget.trajet.heureDepart,
       'prix': widget.trajet.prix,
+      'numerosierge':RandomNumberGenerator.generateRandomNumber().toString(),
       'date': date.toString(),
 
     }).then((value){
