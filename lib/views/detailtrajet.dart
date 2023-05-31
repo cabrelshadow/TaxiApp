@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/views/sierge.dart';
-import 'package:taxiapp/views/test.dart';
+
 
 import '../constants/colors.dart';
 import '../controller/auth_controller.dart';

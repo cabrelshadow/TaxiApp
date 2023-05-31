@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taxiapp/constants/colors.dart';
 import 'package:taxiapp/controller/controller.dart';
+import 'package:taxiapp/views/Admin/admin_homepage.dart';
+import 'package:taxiapp/views/Admin/create_trajets.dart';
 
 import 'package:taxiapp/views/show_trajet.dart';
 
@@ -9,8 +11,7 @@ import 'package:iconly/iconly.dart';
 
 import 'package:taxiapp/views/users.dart';
 
-import 'create_trajets.dart';
-import 'homeScreen.dart';
+
 
 class NavBar extends StatefulWidget {
    NavBar({Key? key}) : super(key: key);
@@ -29,11 +30,10 @@ class _NavBarState extends State<NavBar> {
      return Scaffold(
        body:IndexedStack(
          index: controller.tabIndex,
-         children:  [
-           HomeScreen(),
-           TrajetsListScreen(),
-           UserPage(),
+         children: [
+          AdminHomePage(),
            CreateTrajet(),
+
          ],
 
        ) ,
@@ -45,11 +45,9 @@ class _NavBarState extends State<NavBar> {
          unselectedItemColor: Colors.grey,
 
          items: [
-            _bottombarItem(IconlyBold.home, "home"),
-            _bottombarItem(IconlyBold.ticket, "trajet"),
+            _bottombarItem(IconlyBold.home, "homePage"),
+            _bottombarItem(IconlyBold.arrow_down_circle, "createTrajet"),
 
-            _bottombarItem(IconlyBold.user_2, "users"),
-            _bottombarItem(IconlyBold.arrow_down_circle, "add"),
          ],
        ),
      );

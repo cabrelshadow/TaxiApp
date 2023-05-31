@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/controller/auth_controller.dart';
 import 'package:taxiapp/routes/routes.dart';
+import 'package:taxiapp/views/Admin/controller/authAdmin.dart';
+import 'package:taxiapp/views/Admin/loginScreen.dart';
 import 'package:taxiapp/views/create_trajets.dart';
 import 'package:taxiapp/views/homeScreen.dart';
 import 'package:taxiapp/views/login_screen.dart';
@@ -12,7 +14,7 @@ import 'package:taxiapp/views/profile_settings.dart';
 import 'package:taxiapp/views/show_trajet.dart';
 import 'package:taxiapp/views/sierge.dart';
 import 'package:taxiapp/views/splash_screen.dart';
-import 'package:taxiapp/views/test.dart';
+
 import 'package:taxiapp/views/trajet.dart';
 
 import 'firebase_options.dart';
@@ -30,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthController authController =Get.put(AuthController());
-    authController.decideRoute();
+    //authController.decideRoute();
     final textTheme = Theme.of(context).textTheme;
     return  GetMaterialApp(initialRoute: AppPage.getnavbar(),
       getPages:AppPage.routes ,
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
 
-      home:Splashscreen(),
+      home:AuthPage(),
 
 
     );
