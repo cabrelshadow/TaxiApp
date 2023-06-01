@@ -45,6 +45,7 @@ class _DetailTrajetState extends State<DetailTrajet> {
     DateTime date=DateTime.now();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: appcolor,
         title: Text("detail trajet  " ,style: GoogleFonts.poppins( fontSize: 16),),
       ),
       body:  Column(
@@ -55,7 +56,7 @@ class _DetailTrajetState extends State<DetailTrajet> {
             child: Column(
               children: [
                 Text("les details du ticket sont fornis lors de la selection du ticket",style: GoogleFonts.poppins(
-                    fontWeight: FontWeight.bold,
+
                     color: appcolor,
                     fontSize:15
                 ),)
@@ -158,7 +159,7 @@ class _DetailTrajetState extends State<DetailTrajet> {
   storeUserInfo()async{
     DateTime date=DateTime.now();
     String uid=FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance.collection('ClientReservation').doc(uid).set({
+    FirebaseFirestore.instance.collection('reservations').doc(uid).set({
       'nom_utilisateur':authController.myuser.value.Unom,
       'villedepart':widget.trajet.villeDepart,
       'villeArriver':widget.trajet.villeArrivee,
@@ -166,6 +167,8 @@ class _DetailTrajetState extends State<DetailTrajet> {
       'prix': widget.trajet.prix,
       'numerosierge':RandomNumberGenerator.generateRandomNumber().toString(),
       'date': date.toString(),
+      'uid':uid,
+
 
     }).then((value){
 

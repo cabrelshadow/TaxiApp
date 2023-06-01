@@ -89,7 +89,7 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('${trajet.villeDepart}',style:GoogleFonts.poppins( fontSize: 13)),
-                            Image(image: AssetImage(flech),height: 50,width: 50,),
+                            Image(image: AssetImage(flech),height: 30,width: 30,),
                             Text('${trajet.villeArrivee}', style:GoogleFonts.poppins( fontSize: 13)),
                           ],
                         ),

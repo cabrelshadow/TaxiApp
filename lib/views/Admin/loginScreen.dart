@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taxiapp/constants/colors.dart';
 import 'package:taxiapp/widgets/mybutton.dart';
 import 'package:taxiapp/widgets/textField.dart';
 
@@ -77,7 +78,7 @@ Widget greenButton(String title, Function onPressed) {
     minWidth: Get.width,
     height: 50,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-    color: AppColors.greenColor,
+    color: appcolor,
     onPressed: () => onPressed(),
     child: Text(
       title,

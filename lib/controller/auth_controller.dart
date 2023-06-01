@@ -97,7 +97,11 @@ var  myuser=UserModel(
 
       myuser.value=UserModel.fromJson(event.data()!);
 
+
   });
+  }
+  void SignOut(){
+    FirebaseAuth.instance.signOut();
   }
 
 

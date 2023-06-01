@@ -31,7 +31,7 @@ class _DrawerNavigatorState extends State<DrawerNavigator> {
         children:  [
           UserAccountsDrawerHeader(
 
-              accountName: Text(authController.myuser.value.Unom?? ""),
+              accountName: Text(authController.myuser.value.Unom?? "",style: GoogleFonts.poppins( color: Colors.white),),
               accountEmail: Text(authController.myuser.value.Uprenom?? ""),
               currentAccountPicture: CircleAvatar(
                 backgroundColor:Colors.transparent,
@@ -82,7 +82,9 @@ class _DrawerNavigatorState extends State<DrawerNavigator> {
               title:  Text("se deconnecter",style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
               )),
-              onTap: ()=>Get.to(UserPage())
+              onTap: (){
+                 authController.SignOut();
+              }
           ),
           Divider(
             thickness: 1,

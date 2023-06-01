@@ -11,7 +11,7 @@ Widget  greenIntrWigget(){
     width: Get.width,
     decoration: BoxDecoration(
       image:DecorationImage(
-          image: AssetImage('assets/r.png'),
+          image: AssetImage('assets/mask.png'),
               fit: BoxFit.cover,
       )
 
@@ -36,7 +36,7 @@ Widget greenIntroWidgetWithoutLogos(){
     width: Get.width,
     decoration: BoxDecoration(
       image: DecorationImage(
-        image: AssetImage('assets/r.png'),
+        image: AssetImage('assets/mask.png'),
         fit: BoxFit.fill
       )
     ),
@@ -46,7 +46,7 @@ Widget greenIntroWidgetWithoutLogos(){
       width: Get.width,
       margin: EdgeInsets.only(bottom: Get.height*0.05),
       child: Center(
-        child: Text("S'\enregistrer",
+        child: Text("Completer votre le profile",
         style: GoogleFonts.poppins(fontSize: 24,fontWeight: FontWeight.bold,color: Colors.white),
         ),
       ),

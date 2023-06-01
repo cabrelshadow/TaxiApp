@@ -34,7 +34,7 @@ class _NavBarState extends State<NavBar> {
            HomeScreen(),
            TrajetsListScreen(),
            UserPage(),
-           HistoriqueTrajet(),
+           ReservationWidget(),
            CreateTrajet(),
          ],
 

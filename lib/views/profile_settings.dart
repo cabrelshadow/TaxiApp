@@ -138,7 +138,7 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
                       SizedBox( height: 30),
 
                     isLoading?Center(
-                      child: LinearProgressIndicator(),
+                      child: CircularProgressIndicator(color: appcolor,),
                     ) : greenButton('Register',(){
 
                       if(selectedImage==null){
@@ -218,7 +218,7 @@ bool isLoading=false;
           style: GoogleFonts.poppins(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Color(0xffA7A7A7)),
+              color:Colors.black),
         ),
         const SizedBox(
           height: 6,
@@ -243,13 +243,13 @@ bool isLoading=false;
             style: GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: Color(0xffA7A7A7)),
+                color: Colors.black),
             decoration: InputDecoration(
               prefixIcon: Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Icon(
                   iconData,
-                  color: AppColors.greenColor,
+                  color: appcolor,
                 ),
               ),
               border: InputBorder.none,

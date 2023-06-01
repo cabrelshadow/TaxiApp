@@ -63,14 +63,11 @@ GoogleMapController? myMapController;
               margin: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
 
               child: IconButton(
-
                 onPressed: (){
-                  Get.to(TrajetList());
                 },icon: Image(image: AssetImage(userIcon),),
               ),
             )
           ],
-
         ) ,
         drawer:DrawerNavigator(),
          body: PageView(

@@ -4,6 +4,7 @@ import'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taxiapp/constants/colors.dart';
 
 import '../../utils/app_colors.dart';
 
@@ -39,7 +40,7 @@ class _CreateTrajetState extends State<CreateTrajet> {
                 width: Get.width,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage('assets/r.png'),
+                        image: AssetImage('assets/mask.png'),
                         fit: BoxFit.fill
                     )
                 ),
@@ -179,7 +180,7 @@ class _CreateTrajetState extends State<CreateTrajet> {
           style: GoogleFonts.poppins(
               fontSize: 14,
               fontWeight: FontWeight.w600,
-              color: Color(0xffA7A7A7)),
+              color:Colors.black),
         ),
         const SizedBox(
           height: 6,
@@ -204,16 +205,18 @@ class _CreateTrajetState extends State<CreateTrajet> {
             style: GoogleFonts.poppins(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: Color(0xffA7A7A7)),
+                color: Colors.black),
             decoration: InputDecoration(
+
               prefixIcon: Padding(
                 padding: const EdgeInsets.only(left: 10),
                 child: Icon(
                   iconData,
-                  color: AppColors.greenColor,
+                  color: appcolor,
                 ),
               ),
               border: InputBorder.none,
+
             ),
           ),
         )
@@ -257,7 +260,7 @@ class _CreateTrajetState extends State<CreateTrajet> {
       minWidth: Get.width,
       height: 50,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      color: AppColors.greenColor,
+      color: appcolor,
       onPressed: () => onPressed(),
       child: Text(
         title,

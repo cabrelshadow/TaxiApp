@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taxiapp/controller/auth_controller.dart';
 import 'package:taxiapp/routes/routes.dart';
+import 'package:taxiapp/routes/verifie_user_login.dart';
 import 'package:taxiapp/views/Admin/controller/authAdmin.dart';
 import 'package:taxiapp/views/Admin/loginScreen.dart';
 import 'package:taxiapp/views/create_trajets.dart';
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
 
-      home:Splashscreen(),
+      home:AuthPage(),
 
 
     );

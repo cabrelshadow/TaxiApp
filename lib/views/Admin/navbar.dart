@@ -4,6 +4,7 @@ import 'package:taxiapp/constants/colors.dart';
 import 'package:taxiapp/controller/controller.dart';
 import 'package:taxiapp/views/Admin/admin_homepage.dart';
 import 'package:taxiapp/views/Admin/create_trajets.dart';
+import 'package:taxiapp/views/Admin/user_reservation.dart';
 
 import 'package:taxiapp/views/show_trajet.dart';
 
@@ -33,6 +34,7 @@ class _NavBarState extends State<NavBar> {
          children: [
           AdminHomePage(),
            CreateTrajet(),
+           ReservationList()
 
          ],
 
@@ -47,6 +49,7 @@ class _NavBarState extends State<NavBar> {
          items: [
             _bottombarItem(IconlyBold.home, "homePage"),
             _bottombarItem(IconlyBold.arrow_down_circle, "createTrajet"),
+            _bottombarItem(IconlyBold.time_circle, "historique reservarion"),
 
          ],
        ),
