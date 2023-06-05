@@ -54,6 +54,7 @@ dependencies:
   http: ^0.13.6
   liquid_swipe: ^3.1.0
   smooth_page_indicator: ^1.1.0
+  percent_indicator: ^4.2.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
