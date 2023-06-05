@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:taxiapp/views/Admin/admin_homepage.dart';
 import 'package:taxiapp/views/Admin/create_trajets.dart';
 import 'package:taxiapp/views/Admin/navbar.dart';
+import 'package:taxiapp/views/Admin/trajet.dart';
 import 'package:taxiapp/views/Admin/user_reservation.dart';
 
 import '../../historique_trajet.dart';
@@ -16,6 +17,7 @@ class AppPage{
     GetPage(name: createTrajet, page: ()=>  CreateTrajet()),
     GetPage(name: historiquereservation, page: ()=> ReservationWidget()),
     GetPage(name: userReservation , page: ()=> ReservationList()),
+    GetPage(name: AdminTrajets, page: ()=> Trajets()),
 
   ];
   static getnavbar()=>navbar;
@@ -23,12 +25,14 @@ class AppPage{
   static getcreateTrajet()=>createTrajet;
   static gethistoriquereservation()=>historiquereservation;
   static getUserReservation()=>userReservation ;
+  static getTrajet()=>AdminTrajets ;
 
   static String navbar='/';
   static String homePage='/homePage';
   static String createTrajet='/createTrajet';
   static String historiquereservation='/historiquereservation';
   static String userReservation ='/userReservation ';
+  static String  AdminTrajets='/AdminTrajets ';
 
 
 }

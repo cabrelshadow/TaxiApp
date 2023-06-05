@@ -1,7 +1,7 @@
 const String tAppName="Easy Travels";
 const  String tAppTagligne="pour une\n reservation plus simple ";
 // On Boarding Text
-const String tOnBoardingTitle1="Contruire une app";
+const String tOnBoardingTitle1="Easy travel";
 const String tOnBoardingTitle2="Pour votre voyage sans riques";
 const String tOnBoardingTitle3="Pour votre voyage sans riques";
 const String tOnBoardingSubTitle1="Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à";

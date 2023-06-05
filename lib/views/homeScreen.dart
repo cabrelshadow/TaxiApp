@@ -70,29 +70,172 @@ GoogleMapController? myMapController;
           ],
         ) ,
         drawer:DrawerNavigator(),
-         body: PageView(
-
+         body:Column(
            children: [
-             Scaffold(
-               body: Stack(
+             SizedBox(height: 10,),
+             Container(
+
+               padding: EdgeInsets.symmetric(vertical: 20),
+               margin: EdgeInsets.symmetric(horizontal: 20),
+               width: 500,
+               height: 100,
+               decoration: BoxDecoration(
+                 borderRadius: BorderRadius.circular(10),
+                 color: containerColor1,
+                 boxShadow: [
+                   BoxShadow(
+                     color:appcolor.withOpacity(0.5),
+                     spreadRadius: 2,
+                     blurRadius: 5,
+                     offset: Offset(0, 3), // changes position of shadow
+                   ),
+                 ],
+
+               ),
+                 child: Row(
+
+                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                   children: [
+
+                   Image(image: AssetImage(calender) ,width: 60,height: 50,),
+                     Column(
+                       children: [
+                         Text("les voya Le lorem ipsum\n est, en imprimerie, une suite",style: GoogleFonts.poppins(
+                           color:Colors.white,
+
+                         ),),
+                       ],
+                     )
+                   ],
+                 ),
+             ),
+             SizedBox(height: 15,),
+             Container(
+               margin: EdgeInsets.symmetric(horizontal: 20),
+               width: 500,
+               height: 200,
+               decoration: BoxDecoration(
+                 borderRadius: BorderRadius.circular(10),
+                 color: Colors.white,
+                 boxShadow: [
+                   BoxShadow(
+                     color:Colors.grey.withOpacity(0.5),
+                     spreadRadius: 2,
+                     blurRadius: 5,
+                     offset: Offset(0, 3), // changes position of shadow
+                   ),
+                 ],
+
+               ),
+               child:Stack(
                  children: [
                    GoogleMap(
                      zoomControlsEnabled: false,
 
                      onMapCreated: (GoogleMapController controller){
 
-                        myMapController=controller;
-                        myMapController!.setMapStyle(_mapStyle);
+                       myMapController=controller;
+                       myMapController!.setMapStyle(_mapStyle);
                      },initialCameraPosition: _kGooglePlex,
                    ),
-
-                   builTextField(),
                    builCurrentLocation(),
-                 ],
 
+                 ],
                ),
 
              ),
+             SizedBox(height: 10,),
+             Text("vous pouvez reserver en :",textAlign: TextAlign.start,style: GoogleFonts.poppins(
+               fontWeight: FontWeight.w500
+             ),),
+             SizedBox(height: 10,),
+             Container(
+               padding: EdgeInsets.symmetric(vertical: 50),
+               width: 600,
+               height:260,
+
+               decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+
+                  ),
+
+                 color: Colors.white,
+                 boxShadow: [
+                   BoxShadow(
+                     color:Colors.grey.withOpacity(0.7),
+                     spreadRadius: 1,
+                     blurRadius: 2,
+                     offset: Offset(0, 3), // changes position of shadow
+                   ),
+                 ],
+
+               ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                          Image(image: AssetImage(business),width: 30,height: 30,),
+                            SizedBox(width: 10,),
+                            Text("Business class ",style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15
+                            ),),
+                          ],
+                        ),
+                        SizedBox(height: 30,),
+                        Row(
+                          children: [
+                            Image(image: AssetImage(vip),width: 30,height: 30,),
+                            SizedBox(width: 10,),
+                            Text("Master class",style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19
+                            ),),
+                          ],
+                        ),
+                        SizedBox(height: 30,),
+                        Row(
+                          children: [
+                           Icon(Icons.star_border,color: appcolor,size: 30,),
+                            SizedBox(width: 10,),
+                            Text("Premuim",style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19
+                            ),),
+                          ],
+                        ),
+
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          width: 200,
+                          height: 140,
+                          decoration: BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: AssetImage(busvip),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+
+                        )
+                      ],
+                    )
+                  ],
+                ),
+             )
+
+
            ],
          ),
 

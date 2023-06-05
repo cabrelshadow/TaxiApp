@@ -35,7 +35,7 @@ class _NavBarState extends State<NavBar> {
            TrajetsListScreen(),
            UserPage(),
            ReservationWidget(),
-           CreateTrajet(),
+
          ],
 
        ) ,
@@ -52,7 +52,7 @@ class _NavBarState extends State<NavBar> {
 
             _bottombarItem(IconlyBold.user_2, "users"),
             _bottombarItem(IconlyBold.time_circle, "historique"),
-            _bottombarItem(IconlyBold.arrow_down_circle, "add"),
+
          ],
        ),
      );

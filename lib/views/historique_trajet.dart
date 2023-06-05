@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart' as http;
 
 import '../constants/colors.dart';
 import '../constants/image_string.dart';
@@ -23,7 +25,10 @@ class _ReservationWidgetState extends State<ReservationWidget> {
     super.initState();
     displayUserData();
   }
-
+  void _makePayment() async {
+    await initializePayment();
+    // Traiter la réponse ici
+  }
   Future<void> displayUserData() async {
     String uid = FirebaseAuth.instance.currentUser!.uid;
     var userDocs = await FirebaseFirestore.instance.collection('reservations').where('uid', isEqualTo: uid).get();
@@ -106,6 +111,21 @@ class _ReservationWidgetState extends State<ReservationWidget> {
 
             ],
           ),
+          Divider(color:appcolor),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(onPressed: (){
+                _makePayment();
+
+              }, child:Text("valider le ticket",style:
+              GoogleFonts.poppins(fontWeight:
+              FontWeight.bold,
+                color: appcolor,
+              ),))
+            ],
+          ),
         ],
       ),
     );
@@ -161,6 +181,62 @@ class _ReservationWidgetState extends State<ReservationWidget> {
           );
         },
       )),
+    );
+  }
+  Future<void> initializePayment() async {
+    final client = http.Client();
+
+    final Map<String, dynamic> data = {
+      "currency": "XAF",
+      "amount": 600,
+      "description": "Eeasy travel reservation des ticket de pus ",
+      "email": "sianou93@gmail.com"
+    };
+
+    final response = await client.post(
+      Uri.parse('https://api.notchpay.co/payments/initialize'),
+      headers: {
+        "Authorization": "sb.BFaltHa9yF4wquZBilwvNz0aPMsEKuoZKHi76oHJFLUYrrgWMKbrgziyQQlMMzlAFyHync8bJdSHk4snIlOrTuyOwY3UyUI5fmD0e3nNpqTHe9s2GH3PxiEGW6Dha",
+        "Content-Type": "application/json"
+      },
+      body: json.encode(data),
+    );
+    if(response==404){
+      print("not found");
+    }
+
+    // Traiter la réponse ici
+  }
+  _successsMessage(BuildContext context){
+    return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Container(
+          padding: EdgeInsets.all(8),
+          height: 80,
+          decoration: BoxDecoration(
+            color: Colors.green,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(children: [
+            Icon(Icons.check_circle,color: Colors.white,size: 40,),
+            SizedBox(width: 20,),
+            Expanded(child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Succès",style: GoogleFonts.poppins(),),
+                Spacer(),
+                Text("paiement effectué avec succes!",style: GoogleFonts.poppins(),),
+              ],
+            ))
+          ],),
+        )
+            ,behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            duration:Duration(seconds: 4),
+            dismissDirection: DismissDirection.vertical
+
+
+        )
     );
   }
 }
