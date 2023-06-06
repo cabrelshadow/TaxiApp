@@ -154,10 +154,26 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Nombre de Trajets  :$_trajetNumber",style: GoogleFonts.roboto(fontWeight: FontWeight.bold,color: Colors.white),)
+                        Text("Nombre de Trajets  :$_trajetNumber",style: GoogleFonts.roboto(fontWeight: FontWeight.bold,color: Colors.white),),
+
                       ],
                     ),
+
+
                     SizedBox(height: 5,),
+                    Row(
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 10,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white
+                          ),
+                        ),
+                        Text("12 %",style: GoogleFonts.roboto(fontWeight: FontWeight.bold),)
+                      ],
+                    )
 
                   ],
                 ),
@@ -232,7 +248,9 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                        children: [
                          Icon(Icons.place_outlined,color:Colors.orange,size: 60,),
-                         Text("for free on PC.In this tutorial\n we will provide direct")
+                         Text("for free on PC.In this tutorial\n we will provide direct",style: GoogleFonts.roboto(
+
+                         ),)
                        ],
                     ),
                   )
