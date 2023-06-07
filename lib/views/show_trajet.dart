@@ -18,7 +18,10 @@ class TrajetsListScreen extends StatefulWidget {
   _TrajetsListScreenState createState() => _TrajetsListScreenState();
 }
 
+
 class _TrajetsListScreenState extends State<TrajetsListScreen> {
+  String _searchText = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,28 +29,57 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
         centerTitle: true,
         elevation: 1,
         backgroundColor: Colors.white,
-        title: Text(" liste des trajet" ,style: GoogleFonts.roboto(fontWeight: FontWeight.bold,fontSize: 17,color:appcolor),),
+        title: TextField(
+          onChanged: (value){
+            setState(() {
+              _searchText=value;
+            }
+            );
+          },
+          decoration: InputDecoration(
+            hintText: 'Rechercher trajet...',
+            border: InputBorder.none,
+
+          ),
+
+        ),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('trajets').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          List<Trajet> trajets = snapshot.data!.docs.map((document) => Trajet.fromFirestore(document)).toList();
-          if (trajets.length==0) {
+          if (snapshot.hasError) {
+            return Text('Une erreur est survenue');
+          }
 
-            return Column(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top:150),
-                  child: Center(
-                    child: Text("pas de trajet disponible !!",style: GoogleFonts.poppins(
-                      fontSize: 15,
-                    ),),
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          List<Trajet> trajets = snapshot.data!.docs.map((document) => Trajet.fromFirestore(document)).toList();
+
+          //Filtrez les trajets en fonction du texte recherché
+          if(_searchText.isNotEmpty){
+            trajets = trajets.where((trajet) =>
+            trajet.villeDepart.toLowerCase().contains(_searchText.toLowerCase()) ||
+                trajet.villeArrivee.toLowerCase().contains(_searchText.toLowerCase()))
+                .toList();
+          }
+
+          if (trajets.length==0) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top:150),
+                    child: Center(
+                      child: Text("pas de trajet disponible !!",style: GoogleFonts.poppins(fontSize: 15),),
+                    ),
                   ),
-                ),
-                Center(
-                  child: Image(image: AssetImage(notfound),width: 200, height: 200,),
-                )
-              ],
+                  Center(
+                    child: Image(image: AssetImage(notfound),width: 200, height: 200,),
+                  )
+                ],
+              ),
             );
           }else{
 
@@ -69,9 +101,8 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
                     }else{
                       Navigator.of(context)
                           .push(MaterialPageRoute(
-                        builder: (context)=>LoginScreen()));
+                          builder: (context)=>LoginScreen()));
                     }
-
 
                   },
                   child: Container(
@@ -96,6 +127,8 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text('Ville de départ', style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14)),
+
+
                             Text('Ville d\'arrivée', style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14)),
                           ],
                         ),
@@ -143,4 +176,3 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
     );
   }
 }
-

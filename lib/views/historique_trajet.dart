@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,8 +18,12 @@ class ReservationWidget extends StatefulWidget {
 }
 
 class _ReservationWidgetState extends State<ReservationWidget> {
+
   bool _isLoading = true;
   List<Map<String, dynamic>>? _userDataList;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List<QueryDocumentSnapshot> _reservations = [];
+
 
   @override
   void initState() {
@@ -47,8 +52,13 @@ class _ReservationWidgetState extends State<ReservationWidget> {
       _isLoading = false;
     });
   }
-
-  Widget buildReservationCard(Map<String, dynamic> reservationData) {
+  Future<void> _deleteReservation(String reservationId) async {
+    await _firestore.collection('reservations').doc(reservationId).delete();
+    setState(() {
+      _reservations.removeWhere((reservation) => reservation.id == reservationId);
+    });
+  }
+  Widget buildReservationCard(Map<String, dynamic> reservationData,Function onPressed) {
     return  Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -123,9 +133,15 @@ class _ReservationWidgetState extends State<ReservationWidget> {
               GoogleFonts.poppins(fontWeight:
               FontWeight.bold,
                 color: appcolor,
+              ),)),
+              TextButton(  onPressed: () => onPressed(), child:Text("annuler",style:
+              GoogleFonts.poppins(fontWeight:
+              FontWeight.bold,
+                color: Colors.red,
               ),))
             ],
           ),
+
         ],
       ),
     );
@@ -152,7 +168,11 @@ class _ReservationWidgetState extends State<ReservationWidget> {
         ],
       ),
       body: _isLoading
-          ? CircularProgressIndicator()
+          ? Column(
+            children: const [
+            Center( child: CircularProgressIndicator() , ) ,
+            ],
+          )
           : (_userDataList == null || _userDataList!.isEmpty
           ? Column(
         children: [
@@ -173,9 +193,15 @@ class _ReservationWidgetState extends State<ReservationWidget> {
         itemCount: _userDataList!.length,
         itemBuilder: (context, index) {
           var userData = _userDataList![index];
+       //   String reservationId = _reservations[index].id;
+
           return Column(
             children: [
-              buildReservationCard(userData),
+              buildReservationCard(userData,(){
+                if (userData != null && userData[index] != null) {
+                  _deleteReservation(userData[index]);
+                }
+              }),
               SizedBox(height: 10),
             ],
           );
@@ -202,6 +228,7 @@ class _ReservationWidgetState extends State<ReservationWidget> {
       body: json.encode(data),
     );
     if(response==404){
+
       print("not found");
     }
 
