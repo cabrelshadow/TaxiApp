@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
 
-      home:AuthPage(),
+      home:UserAuthVerifie(),
 
 
     );

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,13 +26,15 @@ class _DrawerNavigatorState extends State<DrawerNavigator> {
 
   }
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
     return Drawer(
        width: 250,
       child: ListView(
         children:  [
+
           UserAccountsDrawerHeader(
 
-              accountName: Text(authController.myuser.value.Unom?? "",style: GoogleFonts.poppins( color: Colors.white),),
+              accountName:Text(authController.myuser.value.Unom?? "",style: GoogleFonts.poppins( color: Colors.white),),
               accountEmail: Text(authController.myuser.value.Uprenom?? ""),
               currentAccountPicture: CircleAvatar(
                 backgroundColor:Colors.transparent,

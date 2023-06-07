@@ -8,6 +8,7 @@ import 'package:taxiapp/views/users.dart';
 
 import '../views/homeScreen.dart';
 import '../views/show_trajet.dart';
+import '../views/tarifs.dart';
 class AppPage{
   static List<GetPage> routes=[
     GetPage(name: navbar, page: ()=>  NavBar()),
@@ -15,16 +16,19 @@ class AppPage{
     GetPage(name: trajetdisponible, page: ()=>  TrajetsListScreen()),
     GetPage(name: user, page: ()=> const UserPage()),
     GetPage(name: Addtrajet, page: ()=>  CreateTrajet()),
+    GetPage(name: tarif, page: ()=>  PlaceListPage()),
   ];
   static getnavbar()=>navbar;
   static gethome()=>home;
   static gettrajet()=>trajetdisponible;
   static getuser()=>user;
+  static gettarif()=>tarif;
 
   static String navbar='/';
   static String home='/home';
   static String trajetdisponible='/trajetdisponible';
   static String user='/user';
   static String Addtrajet='/CreateTrajet';
+  static String tarif='/tarif';
 
 }

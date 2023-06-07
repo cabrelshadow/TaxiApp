@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taxiapp/views/login_screen.dart';
 
 import '../constants/colors.dart';
 import '../constants/image_string.dart';
@@ -55,9 +59,20 @@ class _TrajetsListScreenState extends State<TrajetsListScreen> {
                 return InkWell(
 
                   onTap: (){
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(
-                      builder: (context)=>DetailTrajet(trajet:trajets[index] ,),));
+
+                    User? user = FirebaseAuth.instance.currentUser;
+                    if(user!=null){
+
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                        builder: (context)=>DetailTrajet(trajet:trajets[index] ,),));
+                    }else{
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(
+                        builder: (context)=>LoginScreen()));
+                    }
+
+
                   },
                   child: Container(
                     padding: EdgeInsets.all(10),

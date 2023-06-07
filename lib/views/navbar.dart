@@ -6,6 +6,7 @@ import 'package:taxiapp/controller/controller.dart';
 import 'package:taxiapp/views/show_trajet.dart';
 
 import 'package:iconly/iconly.dart';
+import 'package:taxiapp/views/tarifs.dart';
 
 import 'package:taxiapp/views/users.dart';
 
@@ -35,6 +36,7 @@ class _NavBarState extends State<NavBar> {
            TrajetsListScreen(),
            UserPage(),
            ReservationWidget(),
+           PlaceListPage(),
 
          ],
 
@@ -52,6 +54,7 @@ class _NavBarState extends State<NavBar> {
 
             _bottombarItem(IconlyBold.user_2, "users"),
             _bottombarItem(IconlyBold.time_circle, "historique"),
+            _bottombarItem(Icons.monetization_on, "tarif"),
 
          ],
        ),
