@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,9 +10,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:taxiapp/controller/mobile.dart';
-
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import '../constants/colors.dart';
 import '../constants/image_string.dart';
+import 'package:intl/intl.dart';
 
 class ReservationWidget extends StatefulWidget {
   const ReservationWidget({super.key});
@@ -225,8 +229,18 @@ class _ReservationWidgetState extends State<ReservationWidget> {
           return Column(
             children: [
               buildReservationCard(userData,(){
+                DateTime date = DateTime.parse(_userDataList![index]['date'].toString());
+                String formattedDate = DateFormat('MMMM dd yyyy hh:mm').format(date);
+                PrintTicket(
 
-                PrintTicket();
+
+                   _userDataList![index]['nom_utilisateur'].toString(),
+                    formattedDate,
+                    _userDataList![index]['prix'].toString(),
+                    _userDataList![index]['nombre_personne'].toString(),
+                    _userDataList![index]['type_voyage'].toString(),
+
+                );
               }),
               SizedBox(height: 10),
             ],
@@ -293,11 +307,82 @@ class _ReservationWidgetState extends State<ReservationWidget> {
         )
     );
   }
-  Future<void>PrintTicket()async{
-    PdfDocument document =PdfDocument();
-    document.pages.add();
-    List<int>bytes=document.save() as List<int>;
-    document.dispose();
+  Future<void> PrintTicket(String nom,String date,String prix,String place,String type_voyage) async {
+    final pdf = pw.Document();
+    //final image = pw.MemoryImage(File("assets/bus.png").readAsBytesSync());
+
+
+    pdf.addPage(pw.Page(
+      pageFormat: PdfPageFormat.a5,
+      build: (pw.Context context) {
+        return pw.Column(
+          mainAxisAlignment: pw.MainAxisAlignment.center,
+          crossAxisAlignment: pw.CrossAxisAlignment.center,
+          children: <pw.Widget>[
+
+            pw.Text('Easy Travel', style: pw.TextStyle(
+                fontSize: 24, fontWeight: pw.FontWeight.bold)),
+            pw.Divider(),
+            pw.SizedBox(height: 50),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: <pw.Widget>[
+                pw.Text('Nom:',
+                    style: pw.TextStyle(fontSize: 16)),
+                pw.Text('$nom',
+                    style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold)),
+              ],
+            ),
+            pw.SizedBox(height: 20),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: <pw.Widget>[
+                pw.Text('Date resever:',
+                    style: pw.TextStyle(fontSize: 16)),
+                pw.Text('$date',
+                    style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold)),
+              ],
+            ),
+            pw.SizedBox(height: 20),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: <pw.Widget>[
+                pw.Text('prix:',
+                    style: pw.TextStyle(fontSize: 16)),
+                pw.Text('$prix',
+                    style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold)),
+              ],
+            ),
+            pw.SizedBox(height: 20),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: <pw.Widget>[
+                pw.Text('Nombre de place:',
+                    style: pw.TextStyle(fontSize: 16)),
+                pw.Text('$place',
+                    style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold)),
+              ],
+            ),
+            pw.SizedBox(height: 20),
+            pw.Row(
+              mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+              children: <pw.Widget>[
+                pw.Text('type de voyage:',
+                    style: pw.TextStyle(fontSize: 16)),
+                pw.Text('$type_voyage',
+                    style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold)),
+              ],
+            ),
+            pw.Divider(),
+          ],
+        );
+      },
+    ));
+
+
+    List<int> bytes = await pdf.save();
+
     SaveAndLaundFile(bytes, 'tiket.pdf');
   }
+
 }
