@@ -1,11 +1,13 @@
+import 'dart:io';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'package:taxiapp/controller/mobile.dart';
 
 import '../constants/colors.dart';
 import '../constants/image_string.dart';
@@ -159,7 +161,7 @@ class _ReservationWidgetState extends State<ReservationWidget> {
               FontWeight.bold,
                 color: appcolor,
               ),)),
-              TextButton(  onPressed: () => onPressed(), child:Text("annuler",style:
+              TextButton(  onPressed: () => onPressed(), child:Text("imprimer",style:
               GoogleFonts.poppins(fontWeight:
               FontWeight.bold,
                 color: Colors.red,
@@ -223,9 +225,8 @@ class _ReservationWidgetState extends State<ReservationWidget> {
           return Column(
             children: [
               buildReservationCard(userData,(){
-                if (userData != null && userData[index] != null) {
-                  _deleteReservation(userData[index]);
-                }
+
+                PrintTicket();
               }),
               SizedBox(height: 10),
             ],
@@ -259,6 +260,7 @@ class _ReservationWidgetState extends State<ReservationWidget> {
 
     // Traiter la réponse ici
   }
+
   _successsMessage(BuildContext context){
     return ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Container(
@@ -290,5 +292,12 @@ class _ReservationWidgetState extends State<ReservationWidget> {
 
         )
     );
+  }
+  Future<void>PrintTicket()async{
+    PdfDocument document =PdfDocument();
+    document.pages.add();
+    List<int>bytes=document.save() as List<int>;
+    document.dispose();
+    SaveAndLaundFile(bytes, 'tiket.pdf');
   }
 }
