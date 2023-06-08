@@ -22,11 +22,18 @@ class DetailTrajet extends StatefulWidget {
   @override
   State<DetailTrajet> createState() => _DetailTrajetState();
 
-
-
 }
 
 class _DetailTrajetState extends State<DetailTrajet> {
+  String _selectedTarif = "Premuim";
+  int _selectedNbPersonnes = 1;
+  double _prixUnitaire = 5000.0;
+
+  Map<String,double> tarifs = {
+    "Business class": 5000.0,
+    "Master class": 15000,
+    "Premuim": 5000.0
+  };
   get  index => null;
   AuthController authController= Get.find<AuthController>();
   @override
@@ -34,6 +41,11 @@ class _DetailTrajetState extends State<DetailTrajet> {
     super.initState();
     authController.getUser();
 
+  }
+  void updatePrice(){
+    setState(() {
+      _prixUnitaire = tarifs[_selectedTarif]!;
+    });
   }
   Widget build(BuildContext context) {
 
@@ -48,138 +60,202 @@ class _DetailTrajetState extends State<DetailTrajet> {
         backgroundColor: appcolor,
         title: Text("detail trajet  " ,style: GoogleFonts.poppins( fontSize: 16),),
       ),
-      body:  Column(
+      body:  SingleChildScrollView(
+        child: Column(
 
-        children: [
-          Container(
-            padding: EdgeInsets.all(14),
-            child: Column(
-              children: [
-                Text("les details du ticket sont fornis lors de la selection du ticket",style: GoogleFonts.poppins(
+          children: [
+            Container(
+              padding: EdgeInsets.all(14),
+              child: Column(
+                children: [
+                  Text("les details du ticket sont fornis lors de la selection du ticket",style: GoogleFonts.poppins(
 
-                    color: appcolor,
-                    fontSize:15
-                ),)
-              ],
+                      color: appcolor,
+                      fontSize:15
+                  ),)
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 20,),
-          Container(
-            padding: EdgeInsets.symmetric(vertical: 70,horizontal:20 ),
+            SizedBox(height: 20,),
+            SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 70,horizontal:20 ),
 
-            height: 450,
-            margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3), // changes position of shadow
+                height: 600,
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: BorderRadius.circular(10),
                 ),
-              ],
-              borderRadius: BorderRadius.circular(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text('Ville de départ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text('Ville d\'arrivée', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    SizedBox(height: 5),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(widget.trajet.villeDepart, style:GoogleFonts.poppins( fontSize: 14)),
+                        Text(widget.trajet.villeArrivee, style:GoogleFonts.poppins( fontSize: 14)),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Divider(color: Colors.grey),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+                        Text('Heure de départ: ${widget.trajet.heureDepart}', style:GoogleFonts.poppins( fontSize: 14)),
+
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Divider(color: Colors.grey),
+                    SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Text('type', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text('nombre de personne', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        DropdownButton<String>(
+                          value: _selectedTarif,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedTarif = newValue!;
+                              updatePrice();
+                            });
+                          },
+                          items: tarifs.keys.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                        SizedBox(height:20),
+                        DropdownButton<int>(
+                          value: _selectedNbPersonnes,
+                          onChanged: (int? newValue) {
+                            setState(() {
+                              _selectedNbPersonnes = newValue!;
+                            });
+                          },
+                          items: [1,2,3,4,5,6,7,8].map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text("$value"),
+                            );
+                          }).toList(),
+                        ),
+                        SizedBox(height:20),
+
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+
+                        // Générer 10 nombres aléatoires
+
+                        Text('Siège Numero :',style:GoogleFonts.poppins( fontSize: 14),),
+                        Text('${RandomNumberGenerator.generateRandomNumber().toString()}', style:GoogleFonts.poppins( fontSize: 14)),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+
+
+                        // Générer 10 nombres aléatoires
+
+                        Text('Nom du client :',style:GoogleFonts.poppins(fontSize: 14),),
+                        Text('${authController.myuser.value.Unom?? ""}', style:GoogleFonts.poppins( fontSize: 14)),
+                      ],
+                    ),
+                    SizedBox(height:10),
+                    Divider(color: appcolor,),
+
+                    Text("Prix total : ${_prixUnitaire * _selectedNbPersonnes} FCFA" ,style: GoogleFonts.roboto(
+                      fontWeight: FontWeight.bold
+                    ),),
+                    SizedBox(height: 50,),
+                    isLoading?Center(
+                      child:CircularProgressIndicator( color: appcolor,),
+                    ) : greenButton('Enregistrer',(){
+
+                      setState(() {
+                        isLoading=true;
+                      });
+                      storeUserInfo();
+                    }),
+                  ],
+                ),
+
+              ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text('Ville de départ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                    Text('Ville d\'arrivée', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                SizedBox(height: 5),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(widget.trajet.villeDepart, style:GoogleFonts.poppins( fontSize: 14)),
-                    Text(widget.trajet.villeArrivee, style:GoogleFonts.poppins( fontSize: 14)),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Divider(color: Colors.grey),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-
-                    Text('Heure de départ: ${widget.trajet.heureDepart}', style:GoogleFonts.poppins( fontSize: 14)),
-                    Text('${widget.trajet.prix} Fcfa',  style:GoogleFonts.poppins( fontSize: 14)),
-                  ],
-                ),
-                SizedBox(height: 10),
-                Divider(color: Colors.grey),
-                SizedBox(height: 10),
-                Divider(color: Colors.grey),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
 
 
-                    // Générer 10 nombres aléatoires
-
-                    Text('Siège Numero :',style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14),),
-                    Text('${RandomNumberGenerator.generateRandomNumber().toString()}', style:GoogleFonts.poppins( fontSize: 14)),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-
-
-                    // Générer 10 nombres aléatoires
-
-                    Text('Nom du client :',style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14),),
-                    Text('${authController.myuser.value.Unom?? ""}', style:GoogleFonts.poppins( fontSize: 14)),
-                  ],
-                ),
-                SizedBox(height: 40,),
-                isLoading?Center(
-                  child:CircularProgressIndicator( color: appcolor,),
-                ) : greenButton('Enregistrer',(){
-
-                  setState(() {
-                    isLoading=true;
-                  });
-                  storeUserInfo();
-                }),
-              ],
-            ),
-
-          ),
-
-
-        ],
+          ],
+        ),
       ),
     );
   }
-  storeUserInfo()async{
-    DateTime date=DateTime.now();
-    String uid=FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance.collection('reservations').doc(uid).set({
-      'nom_utilisateur':authController.myuser.value.Unom,
-      'villedepart':widget.trajet.villeDepart,
-      'villeArriver':widget.trajet.villeArrivee,
+  storeUserInfo() async {
+    DateTime date = DateTime.now();
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    // Générer un nouvel identifiant unique pour la réservation
+    String reservationId = UniqueKey().toString();
+
+    await FirebaseFirestore.instance
+        .collection('reservations')
+        .doc(uid)
+        .collection('reservations') // Utiliser une sous-collection pour stocker les réservations de l'utilisateur
+        .doc(reservationId) // Utiliser l'identifiant unique pour la réservation
+        .set({
+      'nom_utilisateur': authController.myuser.value.Unom,
+      'villedepart': widget.trajet.villeDepart,
+      'villeArriver': widget.trajet.villeArrivee,
       'heurDepart': widget.trajet.heureDepart,
-      'prix': widget.trajet.prix,
-      'numerosierge':RandomNumberGenerator.generateRandomNumber().toString(),
+      'prix': _prixUnitaire * _selectedNbPersonnes,
+      'nombre_personne': _selectedNbPersonnes,
+      'type_voyage': _selectedTarif,
+      'numerosierge': RandomNumberGenerator.generateRandomNumber().toString(),
       'date': date.toString(),
-      'uid':uid,
-
-
-    }).then((value){
-
-
+      'uid': uid,
+    })
+        .then((_) {
       setState(() {
-        isLoading=false;
+        isLoading = false;
       });
-       _successsMessage(context);
-
+      _successsMessage(context);
+    })
+        .catchError((error) {
+      print(error);
     });
   }
+
   bool isLoading=false;
 
 }

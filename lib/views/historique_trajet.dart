@@ -36,7 +36,11 @@ class _ReservationWidgetState extends State<ReservationWidget> {
   }
   Future<void> displayUserData() async {
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    var userDocs = await FirebaseFirestore.instance.collection('reservations').where('uid', isEqualTo: uid).get();
+    var userDocs = await FirebaseFirestore.instance
+        .collection('reservations')
+        .doc(uid)
+        .collection('reservations')
+        .get();
 
     if (userDocs.docs.isEmpty) {
       // L'utilisateur n'a pas de réservation enregistrée
@@ -51,7 +55,11 @@ class _ReservationWidgetState extends State<ReservationWidget> {
       _userDataList = userDataList;
       _isLoading = false;
     });
+
+
   }
+
+
   Future<void> _deleteReservation(String reservationId) async {
     await _firestore.collection('reservations').doc(reservationId).delete();
     setState(() {
@@ -99,7 +107,15 @@ class _ReservationWidgetState extends State<ReservationWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Text('heur de depart:', style:GoogleFonts.poppins( fontSize: 13,fontWeight: FontWeight.bold)),
               Text(' ${reservationData['heurDepart']}', style:GoogleFonts.poppins( fontSize: 13)),
+            ],
+          ),
+          Divider(color: Colors.grey),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('prix a payer :', style:GoogleFonts.poppins( fontSize: 13,fontWeight: FontWeight.bold)),
               Text('${reservationData['prix']} fcfa', style:GoogleFonts.poppins( fontSize: 13)),
             ],
           ),
@@ -107,7 +123,7 @@ class _ReservationWidgetState extends State<ReservationWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('date du voyage', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
+              Text('date du voyage :', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
               Text('${reservationData['date']}', style:GoogleFonts.poppins( fontSize: 13)),
 
             ],
@@ -116,8 +132,17 @@ class _ReservationWidgetState extends State<ReservationWidget> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Numero de siège', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
+              Text('Numero de siège:', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
               Text('${reservationData['numerosierge']}', style:GoogleFonts.poppins( fontSize: 13)),
+
+            ],
+          ),
+          Divider(color:appcolor),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Nombre de place :', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
+              Text('${reservationData['nombre_personne']}', style:GoogleFonts.poppins( fontSize: 13)),
 
             ],
           ),
@@ -169,10 +194,10 @@ class _ReservationWidgetState extends State<ReservationWidget> {
       ),
       body: _isLoading
           ? Column(
-            children: const [
-            Center( child: CircularProgressIndicator() , ) ,
-            ],
-          )
+        children: const [
+          Center( child: CircularProgressIndicator() , ) ,
+        ],
+      )
           : (_userDataList == null || _userDataList!.isEmpty
           ? Column(
         children: [
@@ -193,7 +218,7 @@ class _ReservationWidgetState extends State<ReservationWidget> {
         itemCount: _userDataList!.length,
         itemBuilder: (context, index) {
           var userData = _userDataList![index];
-       //   String reservationId = _reservations[index].id;
+          //   String reservationId = _reservations[index].id;
 
           return Column(
             children: [

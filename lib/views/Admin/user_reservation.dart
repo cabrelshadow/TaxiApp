@@ -12,16 +12,29 @@ class ReservationList extends StatefulWidget {
   @override
   _ReservationListState createState() => _ReservationListState();
 }
+
 class _ReservationListState extends State<ReservationList> {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  CollectionReference reservations = FirebaseFirestore.instance.collection('reservations');
+
+  Future<List<QueryDocumentSnapshot<Map<String, dynamic>>>> getAllReservations() async {
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+    await FirebaseFirestore.instance.collectionGroup('reservations').get();
+
+    return querySnapshot.docs;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(
+      appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
-        title: Text("historique de reservation client" ,style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 13,color:appcolor),),
+        title: Text(
+          "Historique de réservation client",
+          style: GoogleFonts.poppins(
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+              color: appcolor),
+        ),
         centerTitle: true,
         elevation: 2,
         shadowColor: Colors.white,
@@ -29,18 +42,19 @@ class _ReservationListState extends State<ReservationList> {
         actions: [
           Container(
             margin: EdgeInsets.symmetric(horizontal: 20, vertical: 7),
-
             child: IconButton(
-              onPressed: (){
-              },icon: Image(image: AssetImage(userIcon),),
+              onPressed: () {},
+              icon: Image(
+                image: AssetImage(userIcon),
+              ),
             ),
           )
         ],
-      ) ,
-      body:  Container(
-        child: FutureBuilder<QuerySnapshot>(
-          future: reservations.get(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      ),
+      body: Container(
+        child: FutureBuilder<List<QueryDocumentSnapshot>>(
+          future: getAllReservations(),
+          builder: (BuildContext context, AsyncSnapshot<List<QueryDocumentSnapshot>> snapshot) {
             if (snapshot.hasError) {
               return Text("Une erreur s'est produite");
             }
@@ -48,27 +62,37 @@ class _ReservationListState extends State<ReservationList> {
             if (snapshot.connectionState == ConnectionState.done) {
               List<Map<String, dynamic>> reservationsData = [];
 
-              snapshot.data!.docs.forEach((DocumentSnapshot document) {
-                Map<String, dynamic> resData = document.data() as Map<String, dynamic>;
+              snapshot.data!.forEach((DocumentSnapshot document) {
+                Map<String, dynamic> resData =
+                document.data() as Map<String, dynamic>;
                 reservationsData.add(resData);
               });
-             if(reservationsData.isEmpty){
-               return  Column(
-                 children: [
-                   Container(
-                     padding: EdgeInsets.only(top:150),
-                     child: Center(
-                       child: Text("pas de reservation client !!",style: GoogleFonts.poppins(
-                         fontSize: 15,
-                       ),),
-                     ),
-                   ),
-                   Center(
-                     child: Image(image: AssetImage(notfound),width: 200, height: 200,),
-                   )
-                 ],
-               );
-             }
+
+              if (reservationsData.isEmpty) {
+                return Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.only(top: 150),
+                      child: Center(
+                        child: Text(
+                          "Pas de réservation client !!",
+                          style: GoogleFonts.poppins(
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Image(
+                        image: AssetImage(notfound),
+                        width: 200,
+                        height: 200,
+                      ),
+                    )
+                  ],
+                );
+              }
+
               return ListView.builder(
                 itemCount: reservationsData.length,
                 itemBuilder: (context, index) {
@@ -82,7 +106,8 @@ class _ReservationListState extends State<ReservationList> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
+                          offset:
+                          Offset(0, 3), // changes position of shadow
                         ),
                       ],
                       borderRadius: BorderRadius.circular(10),
@@ -93,17 +118,29 @@ class _ReservationListState extends State<ReservationList> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Ville de départ', style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14)),
-                            Text('Ville d\'arrivée', style:GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14)),
+                            Text('Ville de départ',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14)),
+                            Text('Ville d\'arrivée',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14)),
                           ],
                         ),
                         SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('${reservationsData[index]['villedepart']}',style:GoogleFonts.poppins( fontSize: 13)),
-                            Image(image: AssetImage(flech),height: 30,width: 30,),
-                            Text('${reservationsData[index]['villeArriver']}', style:GoogleFonts.poppins( fontSize: 13)),
+                            Text('${reservationsData[index]['villedepart']}',
+                                style: GoogleFonts.poppins(fontSize: 13)),
+                            Image(
+                              image: AssetImage(flech),
+                              height: 30,
+                              width: 30,
+                            ),
+                            Text('${reservationsData[index]['villeArriver']}',
+                                style: GoogleFonts.poppins(fontSize: 13)),
                           ],
                         ),
                         SizedBox(height: 6),
@@ -112,8 +149,10 @@ class _ReservationListState extends State<ReservationList> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('nom du client', style:GoogleFonts.poppins( fontSize: 13)),
-                            Text(reservationsData[index]['nom_utilisateur'], style:GoogleFonts.poppins( fontSize: 13)),
+                            Text('Nom du client',
+                                style: GoogleFonts.poppins(fontSize: 13)),
+                            Text(reservationsData[index]['nom_utilisateur'],
+                                style: GoogleFonts.poppins(fontSize: 13)),
                           ],
                         ),
                         Divider(color: Colors.grey),
@@ -122,6 +161,24 @@ class _ReservationListState extends State<ReservationList> {
                           children: [
                             Text('date reservé', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
                             Text(reservationsData[index]['date'].toString(), style:GoogleFonts.poppins( fontSize: 13)),
+
+                          ],
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('type de voyage', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
+                            Text(reservationsData[index]['type_voyage'].toString(), style:GoogleFonts.poppins( fontSize: 13,color: CupertinoColors.activeBlue)),
+
+                          ],
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('nombre de personne', style:GoogleFonts.poppins( fontSize: 13, fontWeight: FontWeight.bold)),
+                            Text(reservationsData[index]['nombre_personne'].toString(), style:GoogleFonts.poppins( fontSize: 13)),
 
                           ],
                         ),
