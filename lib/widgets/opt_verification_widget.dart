@@ -10,6 +10,7 @@ import 'package:taxiapp/utils/app_constants.dart';
 import 'package:taxiapp/widgets/pinput_widget.dart';
 import 'package:taxiapp/widgets/text_wiget.dart';
 
+import '../views/Admin/chart.dart';
 import '../views/otp_verification.dart';
 
 Widget  OptVerificationWidget() {
@@ -35,20 +36,7 @@ Widget  OptVerificationWidget() {
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
-              child: RichText(
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                      style: TextStyle(color: Colors.black, fontSize: 12),
-                      children: [
-                        TextSpan(
-                          text: "${AppConstants.resendCode} ",
-                        ),
-                        TextSpan(
-                            text:"10 seconds",
-                            style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.bold)),
 
-                      ])),
             )
           ],
         ),

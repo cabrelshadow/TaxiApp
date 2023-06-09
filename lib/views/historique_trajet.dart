@@ -16,6 +16,9 @@ import '../constants/colors.dart';
 import '../constants/image_string.dart';
 import 'package:intl/intl.dart';
 
+import '../constants/sizes.dart';
+import '../constants/text_strings.dart';
+
 class ReservationWidget extends StatefulWidget {
   const ReservationWidget({super.key});
 
@@ -24,7 +27,7 @@ class ReservationWidget extends StatefulWidget {
 }
 
 class _ReservationWidgetState extends State<ReservationWidget> {
-
+  String message = "";
   bool _isLoading = true;
   List<Map<String, dynamic>>? _userDataList;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -158,7 +161,70 @@ class _ReservationWidgetState extends State<ReservationWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(onPressed: (){
-                _makePayment();
+                showModalBottomSheet(
+
+                  context: context,
+                  shape: RoundedRectangleBorder(
+                      borderRadius:BorderRadius.only(
+                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(10)
+                      ) ),
+                  builder: (context)=>Container(
+                    padding: EdgeInsets.all(tDefauldSize),
+
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(tForgetPasswordTitle, style: GoogleFonts.poppins(fontWeight: FontWeight.bold,fontSize: 19)),
+
+                          SizedBox(height: 30.0,),
+                          Column(
+                            children: [
+                              Container(
+
+                              padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius:BorderRadius.circular(10),
+                                  color: Colors.grey[200],
+
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image(image: AssetImage(orange),width: 100,height: 100,),
+                                    Text("Orange Money",style: GoogleFonts.roboto(fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+
+                              ),
+                              SizedBox(height: 20,),
+                              Container(
+
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  borderRadius:BorderRadius.circular(10),
+                                  color: Colors.grey[200],
+
+                                ),
+                                child: Row(
+                                  children: [
+                                    Image(image: AssetImage(mtn),width: 100,height: 100,),
+                                    Text("Mtn mobile money",style: GoogleFonts.roboto(fontWeight: FontWeight.bold),)
+                                  ],
+                                ),
+
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 21.0,),
+
+
+                        ],
+                      ),
+                    ),
+                  ),
+                );
 
               }, child:Text("valider le ticket",style:
               GoogleFonts.poppins(fontWeight:
@@ -250,29 +316,15 @@ class _ReservationWidgetState extends State<ReservationWidget> {
     );
   }
   Future<void> initializePayment() async {
-    final client = http.Client();
-
-    final Map<String, dynamic> data = {
-      "currency": "XAF",
-      "amount": 600,
-      "description": "Eeasy travel reservation des ticket de pus ",
-      "email": "sianou93@gmail.com"
-    };
-
-    final response = await client.post(
-      Uri.parse('https://api.notchpay.co/payments/initialize'),
-      headers: {
-        "Authorization": "sb.BFaltHa9yF4wquZBilwvNz0aPMsEKuoZKHi76oHJFLUYrrgWMKbrgziyQQlMMzlAFyHync8bJdSHk4snIlOrTuyOwY3UyUI5fmD0e3nNpqTHe9s2GH3PxiEGW6Dha",
-        "Content-Type": "application/json"
-      },
-      body: json.encode(data),
-    );
-    if(response==404){
-
-      print("not found");
+    final response = await http.get(Uri.parse('https://api.notchpay.co/payments/initialize'));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      setState(() {
+        message = data['message'];
+      });
+    } else {
+      throw Exception('Failed to load data');
     }
-
-    // Traiter la réponse ici
   }
 
   _successsMessage(BuildContext context){

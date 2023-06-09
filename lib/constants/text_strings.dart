@@ -38,7 +38,7 @@ const String tAlreadyHaveAnAccount = "Already have an Account? ";
 
 
 // -- Forget Password Text
-const String tForgetPasswordTitle = "Faire un choix!";
+const String tForgetPasswordTitle = "Faites le choix de votre moyent de paiement";
 const String tForgetPasswordSubTitle = "selectioner la methode de recuperation de mot de passe.";
 const String tResetViaEMail = "recuperer via email";
 const String tResetViaPhone = "recuperer via  telephone";

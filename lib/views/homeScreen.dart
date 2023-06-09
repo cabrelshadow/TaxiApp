@@ -1,5 +1,6 @@
 import'package:flutter/material.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,6 +26,17 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Future<void> _getUserLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      print('Latitude: ${position.latitude}');
+      print('Longitude: ${position.longitude}');
+    } catch (e) {
+      print(e);
+    }
+  }
+
 
   String? _mapStyle;
 
@@ -101,7 +113,7 @@ GoogleMapController? myMapController;
                      Image(image: AssetImage(calender) ,width: 60,height: 50,),
                        Column(
                          children: [
-                           Text("les voya Le lorem ipsum\n est, en imprimerie, une suite",style: GoogleFonts.poppins(
+                           Text("le confort de nos \n passagés est notre priorité",style: GoogleFonts.poppins(
                              color:Colors.white,
 
                            ),),
@@ -257,7 +269,7 @@ GoogleMapController? myMapController;
           backgroundColor: appcolor,
           child: InkWell(
             onTap:(){
-              Get.snackbar("Votre possition", "Douala Akwa nord");
+              _getUserLocation();
             },
             child: Icon(Icons.my_location,color: Colors.white,
             ),

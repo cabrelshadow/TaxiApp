@@ -25,3 +25,5 @@ const String  calender="assets/calender.png";
 const String vip="assets/vip.png";
 const String business="assets/business.png";
 const String busvip="assets/busvip.jpg";
+const String mtn="assets/mtn.png";
+const String orange="assets/orange.png";
