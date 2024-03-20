@@ -41,7 +41,7 @@ class _DrawerNavigatorState extends State<DrawerNavigator> {
                       child: InkWell(
                         onTap:()=>Get.to(ProfileSettingScreen()),
                         child: ClipOval(
-                            child: Image(image:  NetworkImage(authController.myuser.value.Uimage?? ""),fit:BoxFit.cover ,height: 100 ,width: 100,)),
+                            child: Image(image:  NetworkImage( ""),fit:BoxFit.cover ,height: 100 ,width: 100,)),
                       ),
 
                       ),

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,6 +33,8 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
   TextEditingController homeController = TextEditingController();
   TextEditingController businessController = TextEditingController();
 
+TextEditingController telController = TextEditingController();
+TextEditingController emailController= TextEditingController();
 
 
   @override
@@ -95,18 +98,26 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
                         return null;
                       }),
                       SizedBox( height: 10),
+                      TextFieldWidget('telephone',  Icons.phone, telController,(String,input){
+                        keyboardType: TextInputType.phone;
+                        if(input!.isEmpty){
+                          return "le champs ville de residance  est obligatoir";
+                        }
+                        return null;
+                      }),
+                      SizedBox( height: 10),
+                      TextFieldWidget('email',  Icons.telegram_rounded, emailController,(String,input){
+                        if(input!.isEmpty){
+                          return "le champs ville de residance  est obligatoir";
+                        }
+                        return null;
+                      }),
+                      SizedBox( height: 10),
 
 
                       SizedBox( height: 30),
+                    greenButton('Register',(){
 
-                    isLoading?Center(
-                      child: CircularProgressIndicator(color: appcolor,),
-                    ) : greenButton('Register',(){
-
-                        setState(() {
-
-                          isLoading=true;
-                        });
                         storeUserInfo();
 
 
@@ -130,7 +141,7 @@ storeUserInfo()async{
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   try {
     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-      email: nameController.text + '@example.com', // Utilisez le nom comme base pour l'email
+      email: emailController.text.trim(), // Utilisez le nom comme base pour l'email
       password: 'password', // Vous pouvez générer un mot de passe plus sécurisé ici
     );
 
@@ -138,6 +149,8 @@ storeUserInfo()async{
       'nom':nameController.text,
       'prenom':homeController.text,
       'adresse':businessController.text,
+      'telephone':telController.text,
+      'email':emailController.text,
     });
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => NavBar()));
@@ -147,7 +160,10 @@ storeUserInfo()async{
     );
   } catch (e) {
     print('Error during registration: $e');
-    // Afficher un message d'erreur à l'utilisateur, par exemple avec un SnackBar
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('$e')),
+
+    );
   }
 }
 
