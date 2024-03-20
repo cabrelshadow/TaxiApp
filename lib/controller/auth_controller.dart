@@ -87,7 +87,7 @@ var  myuser=UserModel(
     Unom: '',
     Uprenom: '',
     Uadresse: '',
-    Uimage: ''
+
 
 ).obs;
   getUser(){

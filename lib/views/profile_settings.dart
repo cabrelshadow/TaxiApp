@@ -33,15 +33,7 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
   TextEditingController businessController = TextEditingController();
 
 
-  final ImagePicker _picker = ImagePicker();
-  File? selectedImage;
-  getImage(ImageSource source) async {
-    final XFile? image = await _picker.pickImage(source: source);
-    if (image != null) {
-      selectedImage = File(image.path);
-      setState(() {});
-    }
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,37 +49,7 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
                    greenIntroWidgetWithoutLogos(),
                    Align(
                      alignment: Alignment.bottomCenter,
-                       child: InkWell(
-                         onTap:(){ getImage(ImageSource.gallery);},
-                         child: selectedImage == null ?Container(
-                           width: 120,
-                           height: 120,
-                           margin: EdgeInsets.only(bottom: 20),
-                           decoration: BoxDecoration(
-                               shape: BoxShape.circle,
-                               color: Color(0xFFD6D6D6)
-                           ),
-                           child: Center(
-                             child: Icon(Icons.camera_alt,size: 40, color: Colors.white,),
-                           ),
-                         ):Container(
-                           width: 120,
-                           height: 120,
-                           margin: EdgeInsets.only(bottom: 20),
-                           decoration: BoxDecoration(
-                             image: DecorationImage(
-                               image: FileImage(selectedImage!),
-                               fit: BoxFit.cover
 
-                             ),
-                               shape: BoxShape.circle,
-                               color: Color(0xFFD6D6D6)
-                           ),
-                           child: Center(
-
-                           ),
-                         ),
-                       ),
                    ),
 
 
@@ -141,9 +103,6 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
                       child: CircularProgressIndicator(color: appcolor,),
                     ) : greenButton('Register',(){
 
-                      if(selectedImage==null){
-                        Get.snackbar("warning", "svp veillez choisir une image");
-                      }
                         setState(() {
 
                           isLoading=true;
@@ -163,47 +122,35 @@ GlobalKey<FormState> formKey =GlobalKey<FormState>();
     );
   }
 
-  uploadImage(File image)async{
-    String imageUrl='';
-    String fileName=Path.basename(image.path);
-    var reference=FirebaseStorage.instance
-        .ref()
-        .child('users/$fileName');
-    UploadTask uploadTask=reference.putFile(image);
-    TaskSnapshot taskSnapshot= await uploadTask.whenComplete(() => null);
-    await taskSnapshot.ref.getDownloadURL().then(
-            (value) {
-      imageUrl=value;
-      print("Download URL:$value");
-
-    },
-    );
-    return imageUrl;
-  }
 
 storeUserInfo()async{
-    String url=await uploadImage(selectedImage!);
-    String uid=FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'image':url,
+
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  try {
+    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      email: nameController.text + '@example.com', // Utilisez le nom comme base pour l'email
+      password: 'password', // Vous pouvez générer un mot de passe plus sécurisé ici
+    );
+
+    await _firestore.collection('users').doc(userCredential.user!.uid).set({
       'nom':nameController.text,
       'prenom':homeController.text,
       'adresse':businessController.text,
-
-
-    }).then((value){
-        nameController.clear();
-        homeController.clear();
-        businessController.clear();
-
-
-
-      setState(() {
-        isLoading=false;
-      });
-      Get.to(()=>NavBar());
-
     });
+
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => NavBar()));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Utilisateur ajouté avec succès')),
+
+    );
+  } catch (e) {
+    print('Error during registration: $e');
+    // Afficher un message d'erreur à l'utilisateur, par exemple avec un SnackBar
+  }
+}
+
 }
 bool isLoading=false;
 @override
@@ -277,4 +224,4 @@ bool isLoading=false;
 
 
 
-}
+

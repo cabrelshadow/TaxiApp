@@ -12,6 +12,7 @@ import 'package:taxiapp/views/create_trajets.dart';
 import 'package:taxiapp/views/homeScreen.dart';
 import 'package:taxiapp/views/login_screen.dart';
 import 'package:taxiapp/views/navbar.dart';
+import 'package:taxiapp/views/on_boarding/on_boarding_screen.dart';
 import 'package:taxiapp/views/profile_settings.dart';
 import 'package:taxiapp/views/show_trajet.dart';
 import 'package:taxiapp/views/sierge.dart';
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.poppinsTextTheme(textTheme),
       ),
 
-      home:AuthPage(),
+      home:OnBoardingScreen(),
 
 
     );

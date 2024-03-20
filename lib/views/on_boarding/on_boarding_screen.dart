@@ -7,6 +7,7 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:taxiapp/routes/verifie_user_login.dart';
 import 'package:taxiapp/views/login_screen.dart';
+import 'package:taxiapp/views/profile_settings.dart';
 
 
 
@@ -14,6 +15,7 @@ import '../../constants/colors.dart';
 import '../../constants/image_string.dart';
 import '../../constants/text_strings.dart';
 import '../../models/model_on_boarding.dart';
+import '../userProfile.dart';
 import 'on_boading_screen_widget.dart';
 class OnBoardingScreen extends StatefulWidget {
    const OnBoardingScreen({Key? key}) : super(key: key);
@@ -106,7 +108,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             top: 50,
             right: 20,
             child: TextButton(
-              onPressed: ()=> Get.to(UserAuthVerifie()),
+              onPressed: ()=> Get.to(ProfileSettingScreen()),
               child: Text("Skip",style: GoogleFonts.poppins(color: Colors.white,fontWeight: FontWeight.bold),),
             ),
           ),
